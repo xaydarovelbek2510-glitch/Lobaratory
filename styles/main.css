@@ -433,7 +433,252 @@ section {
     line-height: 1.6;
 }
 
-/* Science Council Section */
+/* Botanical Garden Section */
+.botanical-garden {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.botanical-garden::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="botanicalPattern" patternUnits="userSpaceOnUse" width="40" height="40"><path d="M20 10 Q30 20 20 30 Q10 20 20 10" fill="none" stroke="rgba(76,175,80,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23botanicalPattern)"/></svg>');
+    opacity: 0.3;
+}
+
+.garden-content {
+    position: relative;
+    z-index: 1;
+}
+
+.garden-stats {
+    margin-bottom: 4rem;
+}
+
+.garden-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.garden-stat-item {
+    background: white;
+    padding: 2.5rem 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.garden-stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50, #2e7d32);
+}
+
+.garden-stat-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.garden-stat-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.garden-stat-item:hover .garden-stat-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.garden-stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.garden-stat-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.garden-collections {
+    margin-bottom: 4rem;
+}
+
+.garden-collections h3 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.collection-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.collection-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(76,175,80,0.05) 0%, rgba(46,125,50,0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.collection-card:hover::before {
+    opacity: 1;
+}
+
+.collection-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.collection-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #2e7d32;
+    transition: all 0.3s ease;
+}
+
+.collection-card:hover .collection-image {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    color: white;
+}
+
+.collection-card h4 {
+    color: #2e7d32;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.collection-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.collection-count {
+    background: linear-gradient(90deg, #4caf50, #2e7d32);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 0.95rem;
+}
+
+.garden-services h3 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-item {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.service-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #4caf50, #2e7d32);
+    border-radius: 0 2px 2px 0;
+}
+
+.service-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.service-item i {
+    font-size: 2.5rem;
+    color: #4caf50;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-item:hover i {
+    color: #2e7d32;
+    transform: scale(1.1);
+}
+
+.service-item h4 {
+    color: #2e7d32;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.service-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
 .science-council {
     background: #f8f9fa;
 }
@@ -833,18 +1078,38 @@ section {
         gap: 2rem;
     }
 
-    .about-stats {
-        grid-template-columns: 1fr;
+    .about-stats,
+    .garden-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
     .research-grid,
-    .publications-grid {
+    .publications-grid,
+    .collections-grid,
+    .services-list {
         grid-template-columns: 1fr;
     }
 
     .member-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .garden-stat-item,
+    .collection-card,
+    .service-item {
+        padding: 1.5rem;
+    }
+
+    .garden-stat-icon,
+    .collection-image {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .garden-stat-number {
+        font-size: 2.2rem;
     }
 
     section {
