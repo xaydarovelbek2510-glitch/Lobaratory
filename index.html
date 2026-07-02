@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botanika Instituti - Bosh sahifa</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-leaf"></i>
+                <span>Botanika Instituti</span>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link" data-key="nav-home">Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-key="nav-about">Institut haqida</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#research" class="nav-link" data-key="nav-research">Tadqiqotlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#botanical-garden" class="nav-link" data-key="nav-garden">Botanika Bog'i</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#science-council" class="nav-link" data-key="nav-council">Ilmiy Kengash</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#publications" class="nav-link" data-key="nav-publications">Nashrlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-key="nav-contact">Aloqa</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-extras">
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="uz">UZ</button>
+                    <button class="lang-btn" data-lang="ru">RU</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title" data-key="hero-title">O'zbekiston Respublikasi Botanika Instituti</h1>
+                <p class="hero-subtitle" data-key="hero-subtitle">O'simliklar dunyosini tadqiq qilamiz, tabiiy resurslarni saqlashga hissa qo'shamiz</p>
+                <div class="hero-buttons">
+                    <a href="#research" class="btn btn-primary" data-key="hero-research">Tadqiqotlarimiz</a>
+                    <a href="#about" class="btn btn-secondary" data-key="hero-about">Biz haqimizda</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="about-title">Institut haqida</h2>
+                <p class="section-subtitle" data-key="about-subtitle">O'zbekiston flora va fauna dunyosini o'rganuvchi yetakchi ilmiy muassasa</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-key="about-text1">Botanika Instituti O'zbekiston Respublikasi Fanlar akademiyasining tarkibiy qismi bo'lib, o'simliklar dunyosini chuqur o'rganish, tabiiy resurslarni saqlash va racional foydalanish yo'llarini ishlab chiqish bilan shug'ullanadi.</p>
+                    
+                    <p data-key="about-text2">Institut 1950-yilda tashkil etilgan bo'lib, 70 yildan ortiq vaqt davomida O'zbekiston florasi, o'simliklar sistematikasi, ekologiyasi va amaliy botanika sohasida muhim tadqiqotlar olib bormoqda.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label" data-key="stat-researchers">Tadqiqotchilar</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label" data-key="stat-publications">Ilmiy maqolalar</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label" data-key="stat-projects">Loyihalar</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="images/institute-building.jpg" alt="Institut binosi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="research">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="research-title">Tadqiqot yo'nalishlari</h2>
+                <p class="section-subtitle" data-key="research-subtitle">Zamonaviy usullar yordamida o'simliklar dunyosini o'rganamiz</p>
+            </div>
+            
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 data-key="research-taxonomy">O'simliklar sistematikasi</h3>
+                    <p data-key="research-taxonomy-desc">O'zbekiston flora turlarini tasniflash va ularning evolyutsion rivojlanishini o'rganish</p>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 data-key="research-ecology">O'simliklar ekologiyasi</h3>
+                    <p data-key="research-ecology-desc">Atrof-muhit o'zgarishlari ta'sirini o'rganish va moslashish mexanizmlarini aniqlash</p>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 data-key="research-biotech">Biotexnologiya</h3>
+                    <p data-key="research-biotech-desc">O'simliklardan foydali moddalar ajratib olish va in vitro ko'paytirish usullari</p>
+                </div>
+                
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-key="research-conservation">Tabiatni muhofaza qilish</h3>
+                    <p data-key="research-conservation-desc">Kam uchraydigan va yo'qolib ketish xavfi ostidagi turlarni saqlash dasturlari</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botanical Garden Section -->
+    <section id="botanical-garden" class="botanical-garden">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="garden-title">Toshkent Botanika Bog'i</h2>
+                <p class="section-subtitle" data-key="garden-subtitle">Akademik F.N. Rusanov nomidagi botanika bog'i - O'rta Osiyodagi eng yirik o'simliklar kolleksiyasi</p>
+            </div>
+            
+            <div class="garden-content">
+                <div class="garden-stats">
+                    <div class="garden-stat-grid">
+                        <div class="garden-stat-item">
+                            <div class="garden-stat-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="garden-stat-number">4,500+</div>
+                            <div class="garden-stat-label" data-key="garden-species">O'simlik turlari</div>
+                        </div>
+                        
+                        <div class="garden-stat-item">
+                            <div class="garden-stat-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="garden-stat-number">85</div>
+                            <div class="garden-stat-label" data-key="garden-countries">Mamlakatdan</div>
+                        </div>
+                        
+                        <div class="garden-stat-item">
+                            <div class="garden-stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="garden-stat-number">65</div>
+                            <div class="garden-stat-label" data-key="garden-hectares">Gektar maydon</div>
+                        </div>
+                        
+                        <div class="garden-stat-item">
+                            <div class="garden-stat-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="garden-stat-number">1943</div>
+                            <div class="garden-stat-label" data-key="garden-founded">Tashkil etilgan</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="garden-collections">
+                    <h3 data-key="garden-collections-title">Asosiy Kolleksiyalar</h3>
+                    <div class="collections-grid">
+                        <div class="collection-card">
+                            <div class="collection-image">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h4 data-key="collection-endemic">Endemik O'simliklar</h4>
+                            <p data-key="collection-endemic-desc">O'zbekiston va O'rta Osiyoga xos noyob turlar kolleksiyasi</p>
+                            <div class="collection-count">850+ tur</div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-image">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h4 data-key="collection-medicinal">Dorivor O'simliklar</h4>
+                            <p data-key="collection-medicinal-desc">An'anaviy va zamonaviy tibbiyotda qo'llaniladigan o'simliklar</p>
+                            <div class="collection-count">650+ tur</div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-image">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h4 data-key="collection-alpine">Tog' O'simliklari</h4>
+                            <p data-key="collection-alpine-desc">Oloy, Qoratepa va Hisor tizmalaridan yig'ilgan turlar</p>
+                            <div class="collection-count">720+ tur</div>
+                        </div>
+                        
+                        <div class="collection-card">
+                            <div class="collection-image">
+                                <i class="fas fa-cactus"></i>
+                            </div>
+                            <h4 data-key="collection-desert">Cho'l O'simliklari</h4>
+                            <p data-key="collection-desert-desc">Qizilqum va Qoraqum cho'llariga moslashgan turlar</p>
+                            <div class="collection-count">480+ tur</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="garden-services">
+                    <h3 data-key="garden-services-title">Xizmatlar va Imkoniyatlar</h3>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <i class="fas fa-microscope"></i>
+                            <div>
+                                <h4 data-key="service-research">Ilmiy Tadqiqotlar</h4>
+                                <p data-key="service-research-desc">O'simliklar biologiyasi va ekologiyasi bo'yicha tadqiqotlar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h4 data-key="service-education">Ta'lim Dasturlari</h4>
+                                <p data-key="service-education-desc">Talabalar va maktab o'quvchilari uchun ekskursiyalar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <i class="fas fa-seedling"></i>
+                            <div>
+                                <h4 data-key="service-conservation">Muhofaza Dasturlari</h4>
+                                <p data-key="service-conservation-desc">Kam uchraydigan turlarni saqlash va ko'paytirish</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4 data-key="service-tours">Jamoat Turlari</h4>
+                                <p data-key="service-tours-desc">Har hafta oxiri ochiq turlar va master-klasslar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Council Section -->
+    <section id="science-council" class="science-council">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="council-title">Ilmiy Kengash</h2>
+                <p class="section-subtitle" data-key="council-subtitle">Institut faoliyatini koordinatsiya qiluvchi ilmiy organi</p>
+            </div>
+            
+            <div class="council-content">
+                <div class="council-info">
+                    <h3 data-key="council-about">Kengash haqida</h3>
+                    <p data-key="council-desc">Ilmiy Kengash institutning ilmiy faoliyatini rejalashtirish, koordinatsiya qilish va baholash bilan shug'ullanadi. Kengash tarkibiga taniqli olimlar va mutaxassislar kiradi.</p>
+                    
+                    <div class="council-functions">
+                        <h4 data-key="council-functions">Asosiy vazifalar:</h4>
+                        <ul>
+                            <li data-key="council-task1">Ilmiy tadqiqot yo'nalishlarini belgilash</li>
+                            <li data-key="council-task2">Ilmiy loyihalarni baholash va tasdiqlash</li>
+                            <li data-key="council-task3">Dissertatsiya ishlarini himoya qilish</li>
+                            <li data-key="council-task4">Xalqaro hamkorlik dasturlarini ishlab chiqish</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="council-members">
+                    <h3 data-key="council-members">Kengash a'zolari</h3>
+                    <div class="member-grid">
+                        <div class="member-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h4>Prof. A. Karimov</h4>
+                            <p data-key="member1-position">Kengash raisi</p>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h4>Prof. M. Nazarova</h4>
+                            <p data-key="member2-position">Kengash o'rinbosari</p>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h4>Dr. S. Umarov</h4>
+                            <p data-key="member3-position">Kotib</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="publications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="pub-title">Nashrlar</h2>
+                <p class="section-subtitle" data-key="pub-subtitle">Ilmiy tadqiqotlarimiz natijalari</p>
+            </div>
+            
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="pub-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 data-key="pub-journal">Ilmiy jurnal</h3>
+                    <p data-key="pub-journal-desc">"O'zbekiston botanikasi" jurnali yilda 4 marta chop etiladi</p>
+                    <a href="#" class="pub-link" data-key="pub-read">O'qish</a>
+                </div>
+                
+                <div class="publication-card">
+                    <div class="pub-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 data-key="pub-articles">Ilmiy maqolalar</h3>
+                    <p data-key="pub-articles-desc">Xalqaro jurnallarda chop etilgan maqolalar to'plami</p>
+                    <a href="#" class="pub-link" data-key="pub-read">O'qish</a>
+                </div>
+                
+                <div class="publication-card">
+                    <div class="pub-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-key="pub-dissertations">Dissertatsiyalar</h3>
+                    <p data-key="pub-dissertations-desc">Himoya qilingan doktorlik va magistrlik dissertatsiyalari</p>
+                    <a href="#" class="pub-link" data-key="pub-read">O'qish</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-key="contact-title">Aloqa</h2>
+                <p class="section-subtitle" data-key="contact-subtitle">Biz bilan bog'laning</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 data-key="contact-address">Manzil</h4>
+                            <p>Toshkent sh., Chilonzor tumani, Qatortol ko'chasi, 32-uy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 data-key="contact-phone">Telefon</h4>
+                            <p>+998 71 262-39-53</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 data-key="contact-email">Email</h4>
+                            <p>info@botany.uz</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name" data-key="form-name">Ism</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email" data-key="form-email">Email</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject" data-key="form-subject">Mavzu</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" required></textarea>
+                            <label for="message" data-key="form-message">Xabar</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" data-key="form-submit">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Botanika Instituti</span>
+                    </div>
+                    <p data-key="footer-desc">O'zbekiston Respublikasi Fanlar akademiyasining botanika sohasidagi yetakchi ilmiy muassasasi</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-key="footer-quick">Tezkor havolalar</h3>
+                    <ul>
+                        <li><a href="#home" data-key="nav-home">Bosh sahifa</a></li>
+                        <li><a href="#about" data-key="nav-about">Institut haqida</a></li>
+                        <li><a href="#research" data-key="nav-research">Tadqiqotlar</a></li>
+                        <li><a href="#contact" data-key="nav-contact">Aloqa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-key="footer-research">Tadqiqot yo'nalishlari</h3>
+                    <ul>
+                        <li><a href="#" data-key="research-taxonomy">O'simliklar sistematikasi</a></li>
+                        <li><a href="#" data-key="research-ecology">O'simliklar ekologiyasi</a></li>
+                        <li><a href="#" data-key="research-biotech">Biotexnologiya</a></li>
+                        <li><a href="#" data-key="research-conservation">Tabiatni muhofaza qilish</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-key="footer-contact">Aloqa ma'lumotlari</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> Toshkent sh., Chilonzor tumani</p>
+                        <p><i class="fas fa-phone"></i> +998 71 262-39-53</p>
+                        <p><i class="fas fa-envelope"></i> info@botany.uz</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span data-key="footer-copyright">Botanika Instituti. Barcha huquqlar himoyalangan.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
