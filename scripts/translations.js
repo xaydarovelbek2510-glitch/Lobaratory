@@ -9,6 +9,7 @@ const translations = {
         'nav-council': 'Ilmiy Kengash',
         'nav-publications': 'Nashrlar',
         'nav-contact': 'Aloqa',
+        'site-title': 'Botanika Instituti',
 
         // Hero Section
         'hero-title': 'O\'zbekiston Respublikasi Botanika Instituti',
@@ -21,9 +22,24 @@ const translations = {
         'about-subtitle': 'O\'zbekiston flora va fauna dunyosini o\'rganuvchi yetakchi ilmiy muassasa',
         'about-text1': 'Botanika Instituti O\'zbekiston Respublikasi Fanlar akademiyasining tarkibiy qismi bo\'lib, o\'simliklar dunyosini chuqur o\'rganish, tabiiy resurslarni saqlash va racional foydalanish yo\'llarini ishlab chiqish bilan shug\'ullanadi.',
         'about-text2': 'Institut 1950-yilda tashkil etilgan bo\'lib, 70 yildan ortiq vaqt davomida O\'zbekiston florasi, o\'simliklar sistematikasi, ekologiyasi va amaliy botanika sohasida muhim tadqiqotlar olib bormoqda.',
+        'about-history': 'Tariximiz',
+        'about-mission': 'Missiyamiz',
+        'about-mission-text': 'O\'zbekiston o\'simliklarini o\'rganish, saqlash va kelajak avlodlar uchun muhofaza qilish orqali ilm-fan rivojiga hissa qo\'shish.',
+        'about-info': 'Asosiy Ma\'lumotlar',
+        'about-founded': 'Tashkil etilgan',
+        'about-staff': 'Xodimlar',
+        'about-location': 'Joylashuv',
+        'about-area': 'Maydon',
+        'about-achievements': 'Yutuqlarimiz',
+        'achievement1': '500+ ilmiy maqola',
+        'achievement2': '25+ davlat loyihalari',
+        'achievement3': 'IUCN bilan hamkorlik',
+        'achievement4': 'Xalqaro tan olish',
         'stat-researchers': 'Tadqiqotchilar',
         'stat-publications': 'Ilmiy maqolalar',
         'stat-projects': 'Loyihalar',
+        'stat-species': 'O\'simlik turlari',
+        'stat-years': 'Yillik tajriba',
 
         // Research Section
         'research-title': 'Tadqiqot yo\'nalishlari',
@@ -118,6 +134,7 @@ const translations = {
         'nav-council': 'Учёный совет',
         'nav-publications': 'Публикации',
         'nav-contact': 'Контакты',
+        'site-title': 'Институт Ботаники',
 
         // Hero Section
         'hero-title': 'Институт Ботаники Республики Узбекистан',
@@ -227,6 +244,7 @@ const translations = {
         'nav-council': 'Science Council',
         'nav-publications': 'Publications',
         'nav-contact': 'Contact',
+        'site-title': 'Institute of Botany',
 
         // Hero Section
         'hero-title': 'Institute of Botany of the Republic of Uzbekistan',

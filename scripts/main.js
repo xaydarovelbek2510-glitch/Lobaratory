@@ -1,80 +1,112 @@
-// Main JavaScript functionality for the Botany Institute website
+// Main JavaScript functionality for SPA Botany Institute website
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
+    initSPA();
     initNavigation();
     initLanguageSwitcher();
-    initScrollAnimations();
-    initSmoothScrolling();
     initContactForm();
-    initScrollToTop();
-    initParallaxEffects();
 });
+
+// Single Page Application functionality
+let currentPage = 'home';
+
+function initSPA() {
+    // Load home page by default
+    loadPage('home');
+    
+    // Add event listeners to nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            if (page && page !== currentPage) {
+                loadPage(page);
+                setActiveNavLink(this);
+                
+                // Close mobile menu if open
+                const navMenu = document.getElementById('nav-menu');
+                const navToggle = document.getElementById('nav-toggle');
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    });
+}
+
+function loadPage(pageName) {
+    const mainContent = document.getElementById('main-content');
+    const pageHTML = window.pageContent[pageName];
+    
+    if (pageHTML) {
+        // Add fade out effect
+        mainContent.style.opacity = '0';
+        
+        setTimeout(() => {
+            mainContent.innerHTML = pageHTML;
+            currentPage = pageName;
+            
+            // Apply translations to new content
+            if (window.currentLanguage) {
+                switchLanguage(window.currentLanguage);
+            }
+            
+            // Re-initialize contact form if on contact page
+            if (pageName === 'contact') {
+                initContactForm();
+            }
+            
+            // Fade in effect
+            mainContent.style.opacity = '1';
+            mainContent.classList.add('page-transition');
+            
+            // Update page title
+            updatePageTitle(pageName);
+            
+        }, 200);
+    }
+}
+
+function setActiveNavLink(activeLink) {
+    // Remove active class from all nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+    
+    // Add active class to clicked link
+    activeLink.classList.add('active');
+}
+
+function updatePageTitle(pageName) {
+    const titles = {
+        home: 'Bosh sahifa',
+        about: 'Institut haqida',
+        research: 'Tadqiqotlar',
+        garden: 'Botanika Bog\'i',
+        council: 'Ilmiy Kengash',
+        publications: 'Nashrlar',
+        contact: 'Aloqa'
+    };
+    
+    const title = titles[pageName] || 'Botanika Instituti';
+    document.title = `${title} - Botanika Instituti`;
+}
 
 // Navigation functionality
 function initNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.querySelector('.navbar');
 
     // Mobile menu toggle
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
-    });
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        }
-    });
-
-    // Navbar scroll effect
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        // Update active nav link based on scroll position
-        updateActiveNavLink();
-        
-        lastScrollTop = scrollTop;
-    });
-
-    // Update active navigation link based on scroll position
-    function updateActiveNavLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                // Remove active class from all nav links
-                navLinks.forEach(link => link.classList.remove('active'));
-                // Add active class to current nav link
-                if (navLink) {
-                    navLink.classList.add('active');
-                }
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
             }
         });
     }
@@ -92,89 +124,16 @@ function initLanguageSwitcher() {
     });
 }
 
-// Smooth scrolling for anchor links
-function initSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                const headerHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Hero scroll button
-    const heroScroll = document.querySelector('.hero-scroll');
-    if (heroScroll) {
-        heroScroll.addEventListener('click', function() {
-            const aboutSection = document.getElementById('about');
-            if (aboutSection) {
-                const headerHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = aboutSection.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    }
-}
-
-// Scroll animations using Intersection Observer
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.research-card, .stat-item, .publication-card, .member-card, .contact-item');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Initialize elements for animation
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(element);
-    });
-
-    // Stagger animation for grids
-    const gridContainers = document.querySelectorAll('.research-grid, .publications-grid, .member-grid');
-    gridContainers.forEach(container => {
-        const items = container.children;
-        Array.from(items).forEach((item, index) => {
-            item.style.transitionDelay = `${index * 0.1}s`;
-        });
-    });
-}
-
 // Contact form functionality
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        // Remove existing event listeners
+        contactForm.replaceWith(contactForm.cloneNode(true));
+        const newContactForm = document.getElementById('contactForm');
+        
+        newContactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
@@ -196,32 +155,18 @@ function initContactForm() {
             }
             
             // Simulate form submission
-            showNotification('Xabaringiz muvaffaqiyatli yuborildi!', 'success');
-            this.reset();
-        });
-
-        // Form field animation
-        const formGroups = document.querySelectorAll('.form-group');
-        formGroups.forEach(group => {
-            const input = group.querySelector('input, textarea');
-            const label = group.querySelector('label');
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
             
-            if (input && label) {
-                input.addEventListener('focus', function() {
-                    group.classList.add('focused');
-                });
-                
-                input.addEventListener('blur', function() {
-                    if (!this.value) {
-                        group.classList.remove('focused');
-                    }
-                });
-                
-                // Check if input has value on page load
-                if (input.value) {
-                    group.classList.add('focused');
-                }
-            }
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                showNotification('Xabaringiz muvaffaqiyatli yuborildi!', 'success');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
         });
     }
 }
@@ -247,21 +192,23 @@ function showNotification(message, type = 'info') {
     `;
     
     // Add styles
+    const bgColor = type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db';
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
+        top: 100px;
         right: 20px;
-        background: ${type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3'};
+        background: ${bgColor};
         color: white;
         padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         z-index: 10000;
         display: flex;
         align-items: center;
         gap: 1rem;
         max-width: 400px;
-        animation: slideInRight 0.3s ease;
+        animation: slideInRight 0.4s ease;
+        font-weight: 500;
     `;
     
     // Add close functionality
@@ -274,11 +221,16 @@ function showNotification(message, type = 'info') {
         cursor: pointer;
         padding: 0;
         line-height: 1;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
     `;
     
+    closeBtn.addEventListener('mouseenter', () => closeBtn.style.opacity = '1');
+    closeBtn.addEventListener('mouseleave', () => closeBtn.style.opacity = '0.8');
+    
     closeBtn.addEventListener('click', function() {
-        notification.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
+        notification.style.animation = 'slideOutRight 0.4s ease';
+        setTimeout(() => notification.remove(), 400);
     });
     
     document.body.appendChild(notification);
@@ -286,85 +238,13 @@ function showNotification(message, type = 'info') {
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
-            notification.style.animation = 'slideOutRight 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
+            notification.style.animation = 'slideOutRight 0.4s ease';
+            setTimeout(() => notification.remove(), 400);
         }
     }, 5000);
 }
 
-// Scroll to top functionality
-function initScrollToTop() {
-    // Create scroll to top button
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-    scrollToTopBtn.className = 'scroll-to-top';
-    scrollToTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 1000;
-    `;
-    
-    document.body.appendChild(scrollToTopBtn);
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollToTopBtn.style.opacity = '1';
-            scrollToTopBtn.style.visibility = 'visible';
-        } else {
-            scrollToTopBtn.style.opacity = '0';
-            scrollToTopBtn.style.visibility = 'hidden';
-        }
-    });
-    
-    // Scroll to top functionality
-    scrollToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Hover effects
-    scrollToTopBtn.addEventListener('mouseenter', function() {
-        this.style.background = '#2d7d32';
-        this.style.transform = 'translateY(-3px)';
-    });
-    
-    scrollToTopBtn.addEventListener('mouseleave', function() {
-        this.style.background = '#4caf50';
-        this.style.transform = 'translateY(0)';
-    });
-}
-
-// Parallax effects
-function initParallaxEffects() {
-    const heroBackground = document.querySelector('.hero-background');
-    
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        
-        if (heroBackground) {
-            heroBackground.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        }
-    });
-}
-
-// Add CSS animations
+// Add CSS animations for notifications
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
@@ -389,34 +269,47 @@ style.textContent = `
         }
     }
     
-    .form-group.focused label {
-        top: -0.5rem !important;
-        font-size: 0.9rem !important;
-        color: #4caf50 !important;
+    .main-content {
+        transition: opacity 0.2s ease;
     }
     
-    .scroll-to-top:hover {
-        transform: translateY(-3px) !important;
+    /* Smooth hover effects */
+    .nav-link,
+    .lang-btn,
+    .submit-btn,
+    .pub-link {
+        transition: all 0.3s ease;
+    }
+    
+    /* Loading animation for submit button */
+    .fa-spinner {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 `;
 document.head.appendChild(style);
 
-// Initialize AOS (Animate On Scroll) alternative
-function initAOS() {
-    const elements = document.querySelectorAll('[data-aos]');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('aos-animate');
-            }
-        });
-    });
-    
-    elements.forEach(el => observer.observe(el));
-}
+// Smooth scrolling for any remaining anchor links
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href') && e.target.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+});
 
-// Performance optimization: Debounce scroll events
+// Performance optimization: Debounce resize events
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -429,38 +322,30 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Any heavy scroll operations can go here
+// Handle window resize
+const handleResize = debounce(() => {
+    // Any resize-specific operations can go here
 }, 16); // ~60fps
 
-window.addEventListener('scroll', debouncedScrollHandler);
+window.addEventListener('resize', handleResize);
 
-// Lazy loading for images (if any are added later)
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                observer.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// Initialize lazy loading
-initLazyLoading();
+// Keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    // Escape key closes mobile menu
+    if (e.key === 'Escape') {
+        const navMenu = document.getElementById('nav-menu');
+        const navToggle = document.getElementById('nav-toggle');
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    }
+});
 
 // Export functions for external use
 window.botanikaSite = {
+    loadPage,
     switchLanguage,
     showNotification,
-    initScrollAnimations,
-    initLazyLoading
+    currentPage: () => currentPage
 };
