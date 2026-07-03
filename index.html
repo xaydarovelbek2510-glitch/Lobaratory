@@ -1,1948 +1,305 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>O'zbekiston Botanika Instituti — Laboratoriya</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --c-green-1: #0a4a2e;
-      --c-green-2: #145a38;
-      --c-green-3: #1e7a4a;
-      --c-green-4: #27ae60;
-      --c-green-5: #52c97c;
-      --c-green-6: #a8e6c1;
-      --c-gold:    #d4a843;
-      --c-gold-l:  #f0c96a;
-      --c-bg:      #f0f7f3;
-      --c-bg-card: #ffffff;
-      --c-text:    #1a2e22;
-      --c-text-s:  #4a6157;
-      --c-border:  #d0e8da;
-      --shadow-sm: 0 2px 8px rgba(10,74,46,.08);
-      --shadow-md: 0 8px 32px rgba(10,74,46,.14);
-      --shadow-lg: 0 20px 60px rgba(10,74,46,.22);
-      --r:         12px;
-      --r-lg:      20px;
-      --transition: .3s cubic-bezier(.4,0,.2,1);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--c-bg);
-      color: var(--c-text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    button { cursor: pointer; font-family: inherit; border: none; outline: none; }
-
-
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--c-bg); }
-    ::-webkit-scrollbar-thumb { background: var(--c-green-4); border-radius: 99px; }
-
-    /* ===== NAVBAR ===== */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-      background: rgba(10,74,46,.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 70px;
-      transition: var(--transition);
-    }
-    .navbar.scrolled { background: rgba(10,74,46,1); box-shadow: var(--shadow-md); }
-    .nav-brand {
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .nav-logo {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-5));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; box-shadow: 0 2px 12px rgba(39,174,96,.4);
-    }
-    .nav-title { color: #fff; font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
-    .nav-title span { display: block; font-size: .72rem; font-weight: 400; opacity: .7; }
-    .nav-links {
-      display: flex; align-items: center; gap: .25rem; list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,.85); font-size: .88rem; font-weight: 500;
-      padding: .45rem 1rem; border-radius: 8px;
-      transition: var(--transition);
-    }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.12); }
-    .nav-cta {
-      background: linear-gradient(135deg, var(--c-gold), var(--c-gold-l)) !important;
-      color: var(--c-green-1) !important; font-weight: 700 !important;
-      padding: .5rem 1.25rem !important;
-      box-shadow: 0 2px 12px rgba(212,168,67,.35) !important;
-    }
-    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(212,168,67,.5) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; padding: 4px; }
-    .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); display: block; }
-
-
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      background:
-        linear-gradient(160deg, rgba(10,74,46,.92) 0%, rgba(20,90,56,.85) 50%, rgba(10,74,46,.95) 100%),
-        url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80') center/cover no-repeat;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 7rem 1.5rem 4rem;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(39,174,96,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .particle {
-      position: absolute; border-radius: 50%;
-      background: rgba(82,201,124,.25); animation: float linear infinite;
-    }
-    @keyframes float {
-      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
-      backdrop-filter: blur(10px); color: var(--c-gold-l);
-      padding: .4rem 1.1rem; border-radius: 99px;
-      font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-      margin-bottom: 1.5rem; animation: fadeDown .8s ease both;
-    }
-    .hero-badge::before { content: '●'; font-size: .55rem; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY( 30px)} to{opacity:1;transform:translateY(0)} }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
-      color: #fff; line-height: 1.15; font-weight: 700;
-      margin-bottom: 1.25rem; animation: fadeDown .8s .15s ease both;
-    }
-    .hero h1 em { font-style: normal; color: var(--c-green-5); }
-    .hero p {
-      font-size: clamp(1rem, 2.2vw, 1.25rem);
-      color: rgba(255,255,255,.78); max-width: 620px; margin: 0 auto 2.5rem;
-      animation: fadeDown .8s .3s ease both;
-    }
-    .hero-btns {
-      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-      animation: fadeDown .8s .45s ease both;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-3));
-      color: #fff; font-weight: 700; font-size: 1rem;
-      padding: .85rem 2rem; border-radius: var(--r);
-      box-shadow: 0 4px 20px rgba(39,174,96,.4);
-      transition: var(--transition); display: inline-flex; align-items: center; gap: .5rem;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(39,174,96,.55); }
-    .btn-outline {
-      background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.3);
-      color: #fff; font-weight: 600; font-size: 1rem;
-      padding: .85rem 2rem; border-radius: var(--r);
-      backdrop-filter: blur(10px); transition: var(--transition);
-      display: inline-flex; align-items: center; gap: .5rem;
-    }
-    .btn-outline:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
-    .hero-stats {
-      display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
-      margin-top: 4rem; animation: fadeUp .8s .6s ease both;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat strong { display: block; font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; }
-    .hero-stat span { font-size: .82rem; color: rgba(255,255,255,.6); margin-top: .2rem; display: block; }
-    .scroll-down {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .4rem;
-      color: rgba(255,255,255,.5); font-size: .75rem; animation: fadeUp 1s .9s ease both;
-      cursor: pointer; transition: color var(--transition);
-    }
-    .scroll-down:hover { color: rgba(255,255,255,.9); }
-    .scroll-down .arrow { width: 20px; height: 20px; border-right: 2px solid; border-bottom: 2px solid; transform: rotate(45deg); animation: bounce 1.5s infinite; }
-    @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
-
-
-    /* ===== SECTIONS COMMON ===== */
-    section { padding: 5rem 1.5rem; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: linear-gradient(135deg, rgba(39,174,96,.12), rgba(82,201,124,.08));
-      border: 1px solid rgba(39,174,96,.2); color: var(--c-green-3);
-      padding: .35rem 1rem; border-radius: 99px;
-      font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--c-green-1); line-height: 1.2; font-weight: 700;
-      margin-bottom: .75rem;
-    }
-    .section-title em { font-style: normal; color: var(--c-green-4); }
-    .section-sub { color: var(--c-text-s); font-size: 1.05rem; max-width: 560px; }
-    .section-header { margin-bottom: 3rem; }
-    .section-header.center { text-align: center; }
-    .section-header.center .section-sub { margin: 0 auto; }
-
-    /* ===== FEATURES GRID ===== */
-    .features { background: #fff; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .feature-card {
-      background: var(--c-bg);
-      border: 1.5px solid var(--c-border);
-      border-radius: var(--r-lg); padding: 2rem 1.75rem;
-      cursor: pointer; transition: var(--transition);
-      position: relative; overflow: hidden;
-    }
-    .feature-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-3));
-      opacity: 0; transition: var(--transition);
-    }
-    .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-green-4); }
-    .feature-card:hover::before { opacity: .06; }
-    .feature-card > * { position: relative; z-index: 1; }
-    .feature-icon {
-      width: 60px; height: 60px; border-radius: 16px;
-      display: flex; align-items: center; justify-content: center; font-size: 1.75rem;
-      margin-bottom: 1.25rem; transition: var(--transition);
-    }
-    .feature-card:hover .feature-icon { transform: scale(1.1) rotate(-5deg); }
-    .fi-1 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
-    .fi-2 { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
-    .fi-3 { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
-    .fi-4 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
-    .fi-5 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
-    .fi-6 { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); }
-    .feature-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--c-green-1); margin-bottom: .5rem; }
-    .feature-card p  { font-size: .9rem; color: var(--c-text-s); line-height: 1.55; }
-    .feature-arrow {
-      display: inline-flex; align-items: center; gap: .4rem;
-      color: var(--c-green-4); font-size: .85rem; font-weight: 600;
-      margin-top: 1.25rem; transition: var(--transition);
-    }
-    .feature-card:hover .feature-arrow { gap: .7rem; }
-
-
-    /* ===== RESEARCH HIGHLIGHT ===== */
-    .research { background: linear-gradient(160deg, var(--c-green-1) 0%, var(--c-green-2) 100%); }
-    .research-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-    }
-    .research-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      border-radius: var(--r-lg); padding: 1.75rem;
-      cursor: pointer; transition: var(--transition);
-    }
-    .research-card:hover {
-      background: rgba(255,255,255,.12);
-      transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.25);
-    }
-    .research-card h3 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; }
-    .research-card p  { color: rgba(255,255,255,.65); font-size: .88rem; line-height: 1.55; margin-bottom: 1rem; }
-    .research-tag {
-      display: inline-block; background: rgba(82,201,124,.2);
-      border: 1px solid rgba(82,201,124,.4); color: var(--c-green-5);
-      padding: .25rem .75rem; border-radius: 99px; font-size: .76rem; font-weight: 600;
-      margin-right: .4rem; margin-bottom: .4rem;
-    }
-    .research-meta {
-      display: flex; align-items: center; gap: 1rem; margin-top: 1rem;
-      padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.1);
-      font-size: .8rem; color: rgba(255,255,255,.5);
-    }
-    .research-meta span { display: flex; align-items: center; gap: .35rem; }
-
-    /* ===== PLANTS DATABASE SECTION ===== */
-    .plants { background: #fff; }
-    .plants-filter {
-      display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem;
-    }
-    .filter-btn {
-      padding: .45rem 1.1rem; border-radius: 99px;
-      background: var(--c-bg); border: 1.5px solid var(--c-border);
-      color: var(--c-text-s); font-size: .85rem; font-weight: 500;
-      transition: var(--transition);
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--c-green-4); border-color: var(--c-green-4);
-      color: #fff; box-shadow: 0 2px 10px rgba(39,174,96,.3);
-    }
-    .plants-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem;
-    }
-    .plant-card {
-      border-radius: var(--r-lg); overflow: hidden;
-      border: 1.5px solid var(--c-border); background: var(--c-bg-card);
-      cursor: pointer; transition: var(--transition);
-    }
-    .plant-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-green-4); }
-    .plant-img {
-      height: 160px; overflow: hidden; position: relative;
-    }
-    .plant-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .plant-card:hover .plant-img img { transform: scale(1.08); }
-    .plant-badge {
-      position: absolute; top: .7rem; right: .7rem;
-      padding: .2rem .65rem; border-radius: 99px;
-      font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
-    }
-    .badge-endemic { background: rgba(39,174,96,.9); color: #fff; }
-    .badge-rare    { background: rgba(231,76,60,.85);  color: #fff; }
-    .badge-common  { background: rgba(52,152,219,.85); color: #fff; }
-    .plant-info { padding: 1.1rem 1.1rem 1.25rem; }
-    .plant-info h4 { font-size: .95rem; font-weight: 700; color: var(--c-green-1); margin-bottom: .2rem; }
-    .plant-info .latin { font-size: .78rem; color: var(--c-text-s); font-style: italic; margin-bottom: .6rem; }
-    .plant-info .family { font-size: .77rem; color: var(--c-green-4); font-weight: 600; }
-
-
-    /* ===== EQUIPMENT SECTION ===== */
-    .equipment { background: var(--c-bg); }
-    .equip-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
-    }
-    .equip-card {
-      background: #fff; border-radius: var(--r-lg);
-      border: 1.5px solid var(--c-border);
-      padding: 2rem; cursor: pointer; transition: var(--transition);
-      display: flex; flex-direction: column;
-    }
-    .equip-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--c-green-4); }
-    .equip-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
-    .equip-icon {
-      width: 50px; height: 50px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-3));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.35rem; flex-shrink: 0; box-shadow: 0 2px 10px rgba(39,174,96,.3);
-    }
-    .equip-card h3 { font-size: 1rem; font-weight: 700; color: var(--c-green-1); margin-bottom: .2rem; }
-    .equip-card .model { font-size: .8rem; color: var(--c-text-s); }
-    .equip-card p { font-size: .88rem; color: var(--c-text-s); line-height: 1.55; flex-grow: 1; }
-    .equip-specs { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
-    .equip-spec {
-      padding: .2rem .6rem; border-radius: 6px; font-size: .74rem; font-weight: 600;
-      background: linear-gradient(135deg, rgba(39,174,96,.08), rgba(82,201,124,.06));
-      color: var(--c-green-3); border: 1px solid rgba(39,174,96,.15);
-    }
-
-    /* ===== PUBLICATIONS ===== */
-    .publications { background: #fff; }
-    .pubs-grid { display: flex; flex-direction: column; gap: 1rem; }
-    .pub-card {
-      display: flex; align-items: center; gap: 1.5rem;
-      background: var(--c-bg); border: 1.5px solid var(--c-border);
-      border-radius: var(--r-lg); padding: 1.5rem;
-      cursor: pointer; transition: var(--transition);
-    }
-    .pub-card:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: var(--c-green-4); }
-    .pub-year {
-      flex-shrink: 0; width: 70px; height: 70px;
-      border-radius: 14px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-3));
-      color: #fff; box-shadow: 0 2px 10px rgba(39,174,96,.35);
-    }
-    .pub-year strong { font-size: 1.4rem; font-weight: 800; line-height: 1; }
-    .pub-year span   { font-size: .65rem; font-weight: 500; opacity: .7; text-transform: uppercase; }
-    .pub-content h4 { font-size: 1rem; font-weight: 700; color: var(--c-green-1); margin-bottom: .3rem; }
-    .pub-content p  { font-size: .86rem; color: var(--c-text-s); line-height: 1.5; margin-bottom: .5rem; }
-    .pub-authors { font-size: .78rem; color: var(--c-green-4); font-weight: 600; }
-
-    /* ===== TEAM SECTION ===== */
-    .team { background: var(--c-bg); }
-    .team-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;
-    }
-    .team-card {
-      background: #fff; border-radius: var(--r-lg);
-      border: 1.5px solid var(--c-border);
-      padding: 1.75rem; text-align: center;
-      cursor: pointer; transition: var(--transition);
-    }
-    .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-green-4); }
-    .team-avatar {
-      width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem;
-      background: linear-gradient(135deg, var(--c-green-5), var(--c-green-4));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: #fff; font-weight: 700;
-      box-shadow: 0 4px 18px rgba(39,174,96,.3);
-    }
-    .team-card h4 { font-size: .95rem; font-weight: 700; color: var(--c-green-1); margin-bottom: .2rem; }
-    .team-card .role { font-size: .82rem; color: var(--c-green-4); font-weight: 600; margin-bottom: .3rem; }
-    .team-card .desc { font-size: .8rem; color: var(--c-text-s); line-height: 1.45; }
-
-
-    /* ===== CONTACT SECTION ===== */
-    .contact { background: linear-gradient(160deg, var(--c-green-1), #082d1c); padding-bottom: 3rem; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .contact-info h3 { color: #fff; font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
-    .contact-info p  { color: rgba(255,255,255,.7); font-size: .92rem; line-height: 1.6; margin-bottom: 2rem; }
-    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-    .contact-list li {
-      display: flex; align-items: center; gap: 1rem;
-      color: rgba(255,255,255,.85); font-size: .92rem;
-    }
-    .contact-list .icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0;
-    }
-    .contact-form {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px); border-radius: var(--r-lg); padding: 2rem;
-    }
-    .contact-form h3 { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; color: rgba(255,255,255,.7); font-size: .82rem; font-weight: 600; margin-bottom: .4rem; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: .75rem 1rem; border-radius: var(--r);
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-      color: #fff; font-size: .92rem; font-family: inherit; outline: none;
-      transition: var(--transition);
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: var(--c-green-4); background: rgba(255,255,255,.12);
-      box-shadow: 0 0 0 3px rgba(39,174,96,.2);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-      width: 100%; padding: .85rem; border-radius: var(--r);
-      background: linear-gradient(135deg, var(--c-green-4), var(--c-green-3));
-      color: #fff; font-weight: 700; font-size: .95rem;
-      box-shadow: 0 4px 16px rgba(39,174,96,.4); transition: var(--transition);
-    }
-    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(39,174,96,.55); }
-
-    /* ===== FOOTER ===== */
-    .footer {
-      background: #041a10; padding: 3rem 1.5rem 1.5rem; text-align: center;
-      border-top: 1px solid rgba(255,255,255,.05);
-    }
-    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .footer-links a { color: rgba(255,255,255,.55); font-size: .85rem; transition: color var(--transition); }
-    .footer-links a:hover { color: var(--c-green-5); }
-    .footer p { color: rgba(255,255,255,.35); font-size: .78rem; }
-
-
-    /* ===== MODAL SYSTEM ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 9999;
-      background: rgba(4,26,16,.75); backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 2rem; opacity: 0; pointer-events: none;
-      transition: opacity .35s ease;
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-window {
-      background: #fff; border-radius: var(--r-lg);
-      width: 100%; max-width: 700px; max-height: 85vh;
-      overflow-y: auto; box-shadow: var(--shadow-lg);
-      transform: translateY(40px) scale(.95); opacity: 0;
-      transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .35s ease;
-    }
-    .modal-overlay.active .modal-window {
-      transform: translateY(0) scale(1); opacity: 1;
-    }
-    .modal-header {
-      position: sticky; top: 0; z-index: 10;
-      background: linear-gradient(135deg, var(--c-green-1), var(--c-green-2));
-      padding: 1.75rem 2rem; border-radius: var(--r-lg) var(--r-lg) 0 0;
-      display: flex; align-items: flex-start; justify-content: space-between;
-    }
-    .modal-header h2 { color: #fff; font-size: 1.4rem; font-weight: 700; }
-    .modal-header p  { color: rgba(255,255,255,.7); font-size: .88rem; margin-top: .3rem; }
-    .modal-close {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.2);
-      color: #fff; font-size: 1.2rem; display: flex;
-      align-items: center; justify-content: center;
-      transition: var(--transition); flex-shrink: 0;
-    }
-    .modal-close:hover { background: rgba(255,255,255,.3); transform: rotate(90deg); }
-    .modal-body { padding: 2rem; }
-    .modal-body h3 { color: var(--c-green-1); font-size: 1.1rem; font-weight: 700; margin-bottom: .75rem; margin-top: 1.5rem; }
-    .modal-body h3:first-child { margin-top: 0; }
-    .modal-body p  { color: var(--c-text-s); font-size: .92rem; line-height: 1.65; margin-bottom: .75rem; }
-    .modal-body ul { padding-left: 1.25rem; margin-bottom: 1rem; }
-    .modal-body li { color: var(--c-text-s); font-size: .9rem; line-height: 1.7; margin-bottom: .3rem; }
-    .modal-body .highlight-box {
-      background: linear-gradient(135deg, rgba(39,174,96,.08), rgba(82,201,124,.05));
-      border: 1px solid rgba(39,174,96,.15); border-radius: var(--r);
-      padding: 1.25rem; margin: 1rem 0;
-    }
-    .modal-body .highlight-box strong { color: var(--c-green-3); }
-    .modal-gallery {
-      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin: 1rem 0;
-    }
-    .modal-gallery img {
-      width: 100%; height: 120px; object-fit: cover;
-      border-radius: var(--r); border: 1px solid var(--c-border);
-    }
-    .modal-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-      margin: 1.25rem 0;
-    }
-    .modal-stat {
-      text-align: center; padding: 1rem;
-      background: var(--c-bg); border-radius: var(--r); border: 1px solid var(--c-border);
-    }
-    .modal-stat strong { display: block; font-size: 1.6rem; color: var(--c-green-3); font-weight: 800; line-height: 1.2; }
-    .modal-stat span  { font-size: .75rem; color: var(--c-text-s); }
-
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      .research-grid { grid-template-columns: 1fr; }
-      .contact-grid  { grid-template-columns: 1fr; }
-      .modal-stats   { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      .navbar { padding: 0 1rem; }
-      .nav-links { 
-        position: fixed; top: 70px; left: 0; right: 0;
-        background: rgba(10,74,46,.98); backdrop-filter: blur(20px);
-        flex-direction: column; padding: 1.5rem;
-        transform: translateY(-100%); opacity: 0; pointer-events: none;
-        transition: var(--transition);
-      }
-      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-      .hamburger { display: flex; }
-      .hero { padding: 6rem 1rem 3rem; min-height: 90vh; }
-      .hero-stats { gap: 1.5rem; }
-      section { padding: 3.5rem 1rem; }
-      .plants-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-      .pub-card { flex-direction: column; text-align: center; }
-      .team-grid { grid-template-columns: 1fr 1fr; }
-      .modal-window { max-height: 90vh; }
-      .modal-overlay { padding: 1rem; }
-      .modal-gallery { grid-template-columns: 1fr; }
-      .modal-stats { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 480px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .team-grid     { grid-template-columns: 1fr; }
-      .plants-grid   { grid-template-columns: 1fr 1fr; }
-      .hero h1 { font-size: 1.8rem; }
-    }
-
-    /* ===== ANIMATIONS ON SCROLL ===== */
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botanika Instituti — O'zbekiston Fanlar Akademiyasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <a class="nav-brand" href="#">
-      <div class="nav-logo">&#127807;</div>
-      <div class="nav-title">Botanika Instituti<span>O'zbekiston Fanlar Akademiyasi</span></div>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#features">Yo'nalishlar</a></li>
-      <li><a href="#research">Tadqiqotlar</a></li>
-      <li><a href="#plants">O'simliklar</a></li>
-      <li><a href="#equipment">Jihozlar</a></li>
-      <li><a href="#publications">Nashrlar</a></li>
-      <li><a href="#team">Jamoa</a></li>
-      <li><a href="#contact" class="nav-cta">Bog'lanish</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero-particles" id="particles"></div>
-    <div>
-      <div class="hero-badge">Ilmiy-tadqiqot markazi</div>
-      <h1>O'zbekiston <em>Botanika</em> Instituti Laboratoriyasi</h1>
-      <p>O'simliklar dunyosining sirlarini kashf eting. 4300 dan ortiq tur, ilg'or texnologiyalar va zamonaviy laboratoriya jihozlari bilan ilm-fan xizmatida.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="openModal('about')">&#128300; Batafsil</button>
-        <button class="btn-outline" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">&#128218; Yo'nalishlar</button>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-langs">
+        <a href="#" class="active">O'ZBEKCHA</a>
+        <a href="#">РУССКИЙ</a>
+        <a href="#">ENGLISH</a>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><strong>4300+</strong><span>O'simlik turlari</span></div>
-        <div class="hero-stat"><strong>85+</strong><span>Yillik tajriba</span></div>
-        <div class="hero-stat"><strong>120+</strong><span>Olimlar</span></div>
-        <div class="hero-stat"><strong>350+</strong><span>Maqolalar</span></div>
+      <div class="topbar-address">
+        <span>📍 100125, Toshkent sh., Durmon yo'li ko'ch., 32-uy</span>
       </div>
-    </div>
-    <div class="scroll-down" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
-      <span>Pastga aylantiring</span>
-      <div class="arrow"></div>
-    </div>
-  </section>
-
-
-  <!-- ===== FEATURES ===== -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-label">&#127793; Yo'nalishlar</div>
-        <h2 class="section-title">Ilmiy faoliyat <em>yo'nalishlari</em></h2>
-        <p class="section-sub">Institutimiz bir necha asosiy yo'nalishlarda ilmiy-tadqiqot ishlari olib boradi</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card reveal" onclick="openModal('taxonomy')">
-          <div class="feature-icon fi-1">&#127807;</div>
-          <h3>Sistematika va Taksonomiya</h3>
-          <p>O'simliklarni tasniflash, yangi turlarni aniqlash va flora ro'yxatlarini tuzish bo'yicha fundamental tadqiqotlar.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-        <div class="feature-card reveal" onclick="openModal('genetics')">
-          <div class="feature-icon fi-2">&#129516;</div>
-          <h3>Molekulyar Biologiya</h3>
-          <p>O'simliklar DNK tahlili, genetik xilma-xillik va filogenetik aloqalar bo'yicha zamonaviy tadqiqotlar.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-        <div class="feature-card reveal" onclick="openModal('ecology')">
-          <div class="feature-icon fi-3">&#127758;</div>
-          <h3>Ekologiya va Muhofaza</h3>
-          <p>Noyob o'simliklarni himoya qilish, Qizil Kitobga kiritilgan turlarni saqlash dasturlari.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-        <div class="feature-card reveal" onclick="openModal('phyto')">
-          <div class="feature-icon fi-4">&#128138;</div>
-          <h3>Fitokimyo va Farmakognoziya</h3>
-          <p>Dorivor o'simliklardan biologik faol moddalar ajratish va farmakologik xususiyatlarini o'rganish.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-        <div class="feature-card reveal" onclick="openModal('geography')">
-          <div class="feature-icon fi-5">&#128506;</div>
-          <h3>Botanik Geografiya</h3>
-          <p>O'zbekiston floristik hududlarini ajratish, fitogeografik xaritalash va geobotanik tadqiqotlar.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-        <div class="feature-card reveal" onclick="openModal('biotech')">
-          <div class="feature-icon fi-6">&#129514;</div>
-          <h3>Biotexnologiya</h3>
-          <p>In vitro ko'paytirish, hujayra madaniyatlari va o'simlik to'qimalarini yetishtirish texnologiyalari.</p>
-          <div class="feature-arrow">Batafsil &#8594;</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== RESEARCH ===== -->
-  <section class="research" id="research">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label" style="color:var(--c-green-5);border-color:rgba(82,201,124,.3);background:rgba(82,201,124,.1);">&#128300; Tadqiqotlar</div>
-        <h2 class="section-title" style="color:#fff;">Joriy <em>loyihalar</em></h2>
-        <p class="section-sub" style="color:rgba(255,255,255,.65);">Hozirda olib borilayotgan ilmiy-tadqiqot loyihalari</p>
-      </div>
-      <div class="research-grid">
-        <div class="research-card reveal" onclick="openModal('project1')">
-          <h3>O'zbekiston endemik o'simliklari genofondini saqlash</h3>
-          <p>Markaziy Osiyo hududidagi noyob endemik turlarning genetik xilma-xilligini saqlab qolish va ex-situ konservatsiya dasturi.</p>
-          <div>
-            <span class="research-tag">Genetika</span>
-            <span class="research-tag">Konservatsiya</span>
-            <span class="research-tag">Endemizm</span>
-          </div>
-          <div class="research-meta">
-            <span>&#128197; 2024–2027</span>
-            <span>&#128101; 12 ta olim</span>
-            <span>&#127942; Grant: FA-2024-15</span>
-          </div>
-        </div>
-        <div class="research-card reveal" onclick="openModal('project2')">
-          <h3>Dorivor o'simliklardan yangi antibiotiklar izlash</h3>
-          <p>Mahalliy floradagi 600 dan ortiq dorivor tur orasidan antimikrob faollikka ega moddalarni skrining qilish.</p>
-          <div>
-            <span class="research-tag">Fitokimyo</span>
-            <span class="research-tag">Farmakologiya</span>
-            <span class="research-tag">Antimikrob</span>
-          </div>
-          <div class="research-meta">
-            <span>&#128197; 2023–2026</span>
-            <span>&#128101; 8 ta olim</span>
-            <span>&#127942; Xalqaro</span>
-          </div>
-        </div>
-        <div class="research-card reveal" onclick="openModal('project3')">
-          <h3>Orol dengizi bo'yi o'simlik qoplamining monitoringi</h3>
-          <p>Iqlim o'zgarishi sharoitida Orolbo'yi ekotizimlarida o'simlik turlarining dinamikasini kuzatish.</p>
-          <div>
-            <span class="research-tag">Ekologiya</span>
-            <span class="research-tag">Monitoring</span>
-            <span class="research-tag">GIS</span>
-          </div>
-          <div class="research-meta">
-            <span>&#128197; 2022–2026</span>
-            <span>&#128101; 15 ta olim</span>
-            <span>&#127942; UNESCO</span>
-          </div>
-        </div>
-        <div class="research-card reveal" onclick="openModal('project4')">
-          <h3>In vitro sharoitda noyob o'simliklarni ko'paytirish</h3>
-          <p>Qizil Kitobga kiritilgan turlarni laboratoriya sharoitida ko'paytirib, tabiatga qayta joylash texnologiyalari.</p>
-          <div>
-            <span class="research-tag">Biotexnologiya</span>
-            <span class="research-tag">In vitro</span>
-            <span class="research-tag">Reintroduksiya</span>
-          </div>
-          <div class="research-meta">
-            <span>&#128197; 2025–2028</span>
-            <span>&#128101; 6 ta olim</span>
-            <span>&#127942; Grant: BT-2025-03</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== PLANTS DATABASE ===== -->
-  <section class="plants" id="plants">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-label">&#127808; O'simliklar bazasi</div>
-        <h2 class="section-title">Ilmiy <em>kolleksiya</em></h2>
-        <p class="section-sub">Institutimiz gerbariysida saqlanayotgan o'simlik namunalari</p>
-      </div>
-      <div class="plants-filter">
-        <button class="filter-btn active" onclick="filterPlants('all',this)">Barchasi</button>
-        <button class="filter-btn" onclick="filterPlants('endemic',this)">Endemiklar</button>
-        <button class="filter-btn" onclick="filterPlants('rare',this)">Noyob turlar</button>
-        <button class="filter-btn" onclick="filterPlants('common',this)">Keng tarqalgan</button>
-      </div>
-      <div class="plants-grid" id="plantsGrid">
-        <div class="plant-card reveal" data-type="endemic" onclick="openModal('plant1')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1490750967868-88aa4f413621?w=400&q=75" alt="Lepidium olgae" />
-            <span class="plant-badge badge-endemic">Endemik</span>
-          </div>
-          <div class="plant-info">
-            <h4>Olga xarsanoqguli</h4>
-            <p class="latin">Lepidium olgae Regel & Schmalh.</p>
-            <p class="family">Brassicaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="rare" onclick="openModal('plant2')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=400&q=75" alt="Tulipa" />
-            <span class="plant-badge badge-rare">Noyob</span>
-          </div>
-          <div class="plant-info">
-            <h4>Greig lolasi</h4>
-            <p class="latin">Tulipa greigii Regel</p>
-            <p class="family">Liliaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="endemic" onclick="openModal('plant3')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=400&q=75" alt="Allium" />
-            <span class="plant-badge badge-endemic">Endemik</span>
-          </div>
-          <div class="plant-info">
-            <h4>Suvorov piyozi</h4>
-            <p class="latin">Allium suvorovii Regel</p>
-            <p class="family">Amaryllidaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="common" onclick="openModal('plant4')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=75" alt="Ferula" />
-            <span class="plant-badge badge-common">Keng tarqalgan</span>
-          </div>
-          <div class="plant-info">
-            <h4>Kovrak</h4>
-            <p class="latin">Ferula foetida (Bunge) Regel</p>
-            <p class="family">Apiaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="rare" onclick="openModal('plant5')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1518882039706-56ab2e147c2e?w=400&q=75" alt="Iris" />
-            <span class="plant-badge badge-rare">Noyob</span>
-          </div>
-          <div class="plant-info">
-            <h4>Olbert zambarug'i</h4>
-            <p class="latin">Iris albertii Regel</p>
-            <p class="family">Iridaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="endemic" onclick="openModal('plant6')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1528717663417-3742fee05a29?w=400&q=75" alt="Astragalus" />
-            <span class="plant-badge badge-endemic">Endemik</span>
-          </div>
-          <div class="plant-info">
-            <h4>O'zbek shuvoqi</h4>
-            <p class="latin">Astragalus uzbekistanicus</p>
-            <p class="family">Fabaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="common" onclick="openModal('plant7')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&q=75" alt="Juglans" />
-            <span class="plant-badge badge-common">Keng tarqalgan</span>
-          </div>
-          <div class="plant-info">
-            <h4>Yong'oq daraxti</h4>
-            <p class="latin">Juglans regia L.</p>
-            <p class="family">Juglandaceae oilasi</p>
-          </div>
-        </div>
-        <div class="plant-card reveal" data-type="rare" onclick="openModal('plant8')">
-          <div class="plant-img">
-            <img src="https://images.unsplash.com/photo-1504567961739-842cf3f1f2c5?w=400&q=75" alt="Ungernia" />
-            <span class="plant-badge badge-rare">Noyob</span>
-          </div>
-          <div class="plant-info">
-            <h4>Viktor ungeriyasi</h4>
-            <p class="latin">Ungernia victoris Vved.</p>
-            <p class="family">Amaryllidaceae oilasi</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== EQUIPMENT ===== -->
-  <section class="equipment" id="equipment">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-label">&#128300; Laboratoriya jihozlari</div>
-        <h2 class="section-title">Zamonaviy <em>texnologiyalar</em></h2>
-        <p class="section-sub">Laboratoriyamiz eng zamonaviy ilmiy jihozlar bilan jihozlangan</p>
-      </div>
-      <div class="equip-grid">
-        <div class="equip-card reveal" onclick="openModal('equip1')">
-          <div class="equip-header">
-            <div class="equip-icon">&#128300;</div>
-            <div>
-              <h3>Elektron Mikroskop</h3>
-              <p class="model">JEOL JSM-7800F</p>
-            </div>
-          </div>
-          <p>Nanometr darajasida o'simlik to'qimalarining tuzilishini o'rganish uchun scanning elektron mikroskop.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">0.8nm resolution</span>
-            <span class="equip-spec">EDS detektor</span>
-            <span class="equip-spec">Krio-rejim</span>
-          </div>
-        </div>
-        <div class="equip-card reveal" onclick="openModal('equip2')">
-          <div class="equip-header">
-            <div class="equip-icon">&#129516;</div>
-            <div>
-              <h3>PCR Termosikler</h3>
-              <p class="model">Bio-Rad CFX96</p>
-            </div>
-          </div>
-          <p>Real-time PCR qurilmasi — DNK amplifikatsiyasi va gen ekspressiyasi tahlili uchun.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">96-qudoqcha</span>
-            <span class="equip-spec">6 kanal</span>
-            <span class="equip-spec">qPCR</span>
-          </div>
-        </div>
-        <div class="equip-card reveal" onclick="openModal('equip3')">
-          <div class="equip-header">
-            <div class="equip-icon">&#9879;</div>
-            <div>
-              <h3>HPLC Xromatograf</h3>
-              <p class="model">Agilent 1260 Infinity II</p>
-            </div>
-          </div>
-          <p>O'simlik ekstraktlaridan biologik faol moddalarni ajratish va identifikatsiya qilish.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">DAD detektor</span>
-            <span class="equip-spec">Autosampler</span>
-            <span class="equip-spec">Gradient</span>
-          </div>
-        </div>
-        <div class="equip-card reveal" onclick="openModal('equip4')">
-          <div class="equip-header">
-            <div class="equip-icon">&#128161;</div>
-            <div>
-              <h3>Spektrofotometr</h3>
-              <p class="model">Shimadzu UV-1900i</p>
-            </div>
-          </div>
-          <p>UV-Vis spektral tahlil — o'simlik pigmentlari va metabolitlarni miqdoriy aniqlash.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">190-1100nm</span>
-            <span class="equip-spec">Dual beam</span>
-            <span class="equip-spec">USB data</span>
-          </div>
-        </div>
-        <div class="equip-card reveal" onclick="openModal('equip5')">
-          <div class="equip-header">
-            <div class="equip-icon">&#127777;</div>
-            <div>
-              <h3>Fitotron Kamera</h3>
-              <p class="model">Percival E-36L</p>
-            </div>
-          </div>
-          <p>Nazorat ostida o'simliklarni yetishtirish — harorat, yorug'lik va namlik avtomatik boshqariladi.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">-10...+50&#176;C</span>
-            <span class="equip-spec">LED chiroqlar</span>
-            <span class="equip-spec">CO2 nazorat</span>
-          </div>
-        </div>
-        <div class="equip-card reveal" onclick="openModal('equip6')">
-          <div class="equip-header">
-            <div class="equip-icon">&#129504;</div>
-            <div>
-              <h3>DNA Sekvenator</h3>
-              <p class="model">Illumina MiSeq</p>
-            </div>
-          </div>
-          <p>Yangi avlod sekvenirlash — o'simlik genomlarini tez va arzon narxda o'qish.</p>
-          <div class="equip-specs">
-            <span class="equip-spec">NGS</span>
-            <span class="equip-spec">15 Gb/run</span>
-            <span class="equip-spec">2x300bp</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== PUBLICATIONS ===== -->
-  <section class="publications" id="publications">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-label">&#128218; Nashrlar</div>
-        <h2 class="section-title">Ilmiy <em>maqolalar</em></h2>
-        <p class="section-sub">So'nggi yillarda chop etilgan asosiy ilmiy ishlar</p>
-      </div>
-      <div class="pubs-grid">
-        <div class="pub-card reveal" onclick="openModal('pub1')">
-          <div class="pub-year"><strong>2026</strong><span>Mart</span></div>
-          <div class="pub-content">
-            <h4>O'zbekiston florasiga yangi qo'shimchalar: 15 ta yangi tur</h4>
-            <p>Chatqol va Hisor tog' tizmalaridan aniqlangan yangi o'simlik turlari haqida ma'lumot.</p>
-            <p class="pub-authors">Shomurodov K.Sh., Beshko N.Yu., Abdullaev A.K.</p>
-          </div>
-        </div>
-        <div class="pub-card reveal" onclick="openModal('pub2')">
-          <div class="pub-year"><strong>2025</strong><span>Noyab</span></div>
-          <div class="pub-content">
-            <h4>Ferula turkumining fitokimyoviy tahlili va antimikrob xususiyatlari</h4>
-            <p>Ferula foetida va F. kuhistanica turlaridan ajratilgan kumarinlar va seskviterpenlarning farmakologik faolligi.</p>
-            <p class="pub-authors">Raxmatov A.B., Karimova M.T., Chen Y.</p>
-          </div>
-        </div>
-        <div class="pub-card reveal" onclick="openModal('pub3')">
-          <div class="pub-year"><strong>2025</strong><span>Iyul</span></div>
-          <div class="pub-content">
-            <h4>Orolbo'yi o'simlik qoplamining 2020-2025 yillardagi o'zgarishlari</h4>
-            <p>Sun'iy yo'ldosh ma'lumotlari asosida Orol dengizi qurg'oqchil hududlarida vegetatsiya dinamikasi.</p>
-            <p class="pub-authors">Tashpulatov J.J., Mamadalieva N.Z., Botirov K.</p>
-          </div>
-        </div>
-        <div class="pub-card reveal" onclick="openModal('pub4')">
-          <div class="pub-year"><strong>2024</strong><span>Dek</span></div>
-          <div class="pub-content">
-            <h4>Markaziy Osiyo lolalari: molekulyar filogenetik tahlil</h4>
-            <p>Tulipa turkumiga mansub 28 ta turning ITS va matK genlari asosida taksonomik qayta ko'rib chiqilishi.</p>
-            <p class="pub-authors">Tojibaev K.Sh., Sennikov A.N., de Groot J.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TEAM ===== -->
-  <section class="team" id="team">
-    <div class="container">
-      <div class="section-header center">
-        <div class="section-label">&#128101; Jamoamiz</div>
-        <h2 class="section-title">Yetakchi <em>olimlar</em></h2>
-        <p class="section-sub">Institutimizning ilmiy salohiyati — tajribali mutaxassislar jamoasi</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card reveal" onclick="openModal('team1')">
-          <div class="team-avatar">KT</div>
-          <h4>Tojibaev K.Sh.</h4>
-          <p class="role">Direktor, professor</p>
-          <p class="desc">Sistematika va botanik geografiya bo'yicha yetakchi mutaxassis</p>
-        </div>
-        <div class="team-card reveal" onclick="openModal('team2')">
-          <div class="team-avatar">NB</div>
-          <h4>Beshko N.Yu.</h4>
-          <p class="role">Lab mudiri, PhD</p>
-          <p class="desc">Flora inventarizatsiyasi va geobotanika mutaxassisi</p>
-        </div>
-        <div class="team-card reveal" onclick="openModal('team3')">
-          <div class="team-avatar">AM</div>
-          <h4>Mamadalieva N.Z.</h4>
-          <p class="role">Fitokimyo lab., DSc</p>
-          <p class="desc">Dorivor o'simliklar kimyosi va farmakognoziya</p>
-        </div>
-        <div class="team-card reveal" onclick="openModal('team4')">
-          <div class="team-avatar">KS</div>
-          <h4>Shomurodov K.Sh.</h4>
-          <p class="role">Ekologiya bo'limi</p>
-          <p class="desc">O'simliklar ekologiyasi va konservatsiya biologiyasi</p>
-        </div>
-        <div class="team-card reveal" onclick="openModal('team5')">
-          <div class="team-avatar">JT</div>
-          <h4>Tashpulatov J.J.</h4>
-          <p class="role">GIS mutaxassisi</p>
-          <p class="desc">Masofaviy zondlash va ekologik modellashtirish</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== CONTACT ===== -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="section-label" style="color:var(--c-green-5);border-color:rgba(82,201,124,.3);background:rgba(82,201,124,.1);">&#128231; Aloqa</div>
-          <h3>Biz bilan bog'laning</h3>
-          <p>Ilmiy hamkorlik, laboratoriya xizmatlari yoki boshqa savollar bo'yicha biz bilan bog'laning.</p>
-          <ul class="contact-list">
-            <li><span class="icon">&#128205;</span> 100125, Toshkent sh., Durmon yo'li ko'ch., 32-uy</li>
-            <li><span class="icon">&#128222;</span> +998 (71) 262-79-10</li>
-            <li><span class="icon">&#128231;</span> info@botany.uz</li>
-            <li><span class="icon">&#127760;</span> www.botany.uz</li>
-            <li><span class="icon">&#128338;</span> Du–Ju: 09:00–18:00</li>
-          </ul>
-        </div>
-        <div class="contact-form">
-          <h3>Xabar yuborish</h3>
-          <div class="form-group">
-            <label>Ismingiz</label>
-            <input type="text" placeholder="Ism familiyangiz" />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="example@mail.com" />
-          </div>
-          <div class="form-group">
-            <label>Mavzu</label>
-            <input type="text" placeholder="Xabar mavzusi" />
-          </div>
-          <div class="form-group">
-            <label>Xabar matni</label>
-            <textarea placeholder="Xabaringizni yozing..."></textarea>
-          </div>
-          <button class="form-submit" onclick="alert('Xabaringiz yuborildi! Tez orada javob beramiz.')">Yuborish &#10148;</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="#features">Yo'nalishlar</a>
-      <a href="#research">Tadqiqotlar</a>
-      <a href="#plants">O'simliklar</a>
-      <a href="#equipment">Jihozlar</a>
-      <a href="#publications">Nashrlar</a>
-      <a href="#team">Jamoa</a>
-      <a href="#contact">Aloqa</a>
-    </div>
-    <p>&copy; 2026 O'zbekiston Botanika Instituti. Barcha huquqlar himoyalangan.</p>
-  </footer>
-
-
-  <!-- ===== MODAL OVERLAY ===== -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
-    <div class="modal-window" id="modalWindow">
-      <div class="modal-header">
-        <div>
-          <h2 id="modalTitle">Modal Title</h2>
-          <p id="modalSubtitle">Subtitle</p>
-        </div>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
 
-  <!-- ===== JAVASCRIPT ===== -->
-  <script>
-  // ===== MODAL CONTENT DATABASE =====
-  const modals = {
-    about: {
-      title: "O'zbekiston Botanika Instituti",
-      subtitle: "Fanlar Akademiyasi tarkibida",
-      body: `
-        <h3>Institut haqida</h3>
-        <p>O'zbekiston Fanlar Akademiyasi Botanika instituti 1938-yilda tashkil etilgan. Bugungi kunda institut Markaziy Osiyo mintaqasida o'simliklar dunyosini o'rganish bo'yicha yetakchi ilmiy-tadqiqot markazi hisoblanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>4300+</strong><span>O'simlik turlari</span></div>
-          <div class="modal-stat"><strong>1.5M+</strong><span>Gerbariy namunalari</span></div>
-          <div class="modal-stat"><strong>85+</strong><span>Yillik tarix</span></div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🌿</div>
+        <div class="logo-text">
+          <strong>BOTANIKA INSTITUTI</strong>
+          <span>O'ZBEKISTON FANLAR AKADEMIYASI</span>
         </div>
-        <h3>Asosiy vazifalari</h3>
-        <ul>
-          <li>O'zbekiston florasini inventarizatsiya qilish va yangi turlarni aniqlash</li>
-          <li>Noyob va yo'qolib borayotgan o'simlik turlarini muhofaza qilish</li>
-          <li>Dorivor o'simliklarning kimyoviy tarkibini o'rganish</li>
-          <li>Ekologik monitoring va tabiatni muhofaza dasturlarini amalga oshirish</li>
-          <li>Yosh olimlar va magistrlar tayyorlash</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Gerbariy fondi:</strong> Institutning ilmiy gerbariyi (TASH) 1,5 million dan ortiq quritilgan o'simlik namunalarini o'z ichiga oladi — bu Markaziy Osiyo mintaqasidagi eng yirik to'plam.
+      </a>
+      <div class="header-contacts">
+        <div class="header-contact-item">
+          <span class="hc-icon">📞</span>
+          <div>
+            <small>BOG'LANISH</small>
+            <strong>(+998 71) 262-37-95</strong>
+          </div>
         </div>
-        <h3>Xalqaro hamkorlik</h3>
-        <p>Institut dunyoning 30 dan ortiq davlatlaridagi ilmiy muassasalar bilan hamkorlik aloqalarini yuritadi, jumladan Kew Royal Botanic Gardens (Angliya), Missouri Botanical Garden (AQSH), va Komarov Botanika instituti (Rossiya).</p>
-      `
-    },
-    taxonomy: {
-      title: "Sistematika va Taksonomiya",
-      subtitle: "O'simliklarni tasniflash fani",
-      body: `
-        <h3>Yo'nalish haqida</h3>
-        <p>Sistematika — o'simliklar dunyosining xilma-xilligini tartibga solish va tasniflash fani. Bizning laboratoriyamizda morfologik, anatomik va molekulyar usullar qo'llanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>4300+</strong><span>Tasniflangan turlar</span></div>
-          <div class="modal-stat"><strong>105</strong><span>Oilalar</span></div>
-          <div class="modal-stat"><strong>613</strong><span>Turkumlar</span></div>
+        <div class="header-contact-item">
+          <span class="hc-icon">🕐</span>
+          <div>
+            <small>ISH VAQTI</small>
+            <strong>Du – Ju: 09:00 – 18:00</strong>
+          </div>
         </div>
-        <h3>Asosiy tadqiqot sohalari</h3>
-        <ul>
-          <li>O'zbekiston florasining to'liq inventarizatsiyasi</li>
-          <li>Yangi turlar va podturlarni tavsiflash</li>
-          <li>Nomenklatura va tipofikatsiya masalalari</li>
-          <li>Regional floralar va opredelitellar tuzish</li>
-          <li>Filogenetik tahlillar (molekulyar sistematika)</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Muhim natija:</strong> So'nggi 5 yilda O'zbekiston florasiga 50 dan ortiq yangi tur qo'shilgan, ulardan 12 tasi fan uchun mutlaqo yangi turlar sifatida tavsiflangan.
-        </div>
-        <h3>Ishlatilgan usullar</h3>
-        <p>Klassik morfologik tavsif, SEM mikroskopiya, pollinologiya, kariologiya, ITS/matK/rbcL markerlar asosida molekulyar filogenetika.</p>
-      `
-    },
+        <a href="contacts.html" class="header-cta">BOG'LANISH</a>
+      </div>
+    </div>
+  </header>
 
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="container">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="active">BOSH SAHIFA</a></li>
+        <li class="has-dropdown">
+          <a href="structure.html">STRUKTURA</a>
+          <ul class="dropdown">
+            <li><a href="about.html">Biz haqimizda</a></li>
+            <li><a href="leadership.html">Rahbariyat</a></li>
+            <li><a href="structure.html">Institut tuzilmasi</a></li>
+            <li><a href="charter.html">Ustav</a></li>
+            <li class="has-subdropdown">
+              <a href="laboratories.html">Laboratoriyalar ›</a>
+              <ul class="subdropdown">
+                <li><a href="lab-flora.html">Flora laboratoriyasi</a></li>
+                <li><a href="lab-geobotany.html">Geobotanika laboratoriyasi</a></li>
+                <li><a href="lab-molecular.html">Molekulyar biologiya laboratoriyasi</a></li>
+                <li><a href="lab-phytochemistry.html">Fitokimyo laboratoriyasi</a></li>
+                <li><a href="lab-ecology.html">Ekologiya laboratoriyasi</a></li>
+                <li><a href="lab-resources.html">Tabiiy resurslar laboratoriyasi</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="research.html">ILMIY FAOLIYAT</a>
+          <ul class="dropdown">
+            <li><a href="research.html">Ilmiy yo'nalishlar</a></li>
+            <li><a href="publications.html">Nashrlar (2018–2026)</a></li>
+            <li><a href="intellectual.html">Intellektual mulk</a></li>
+            <li><a href="funding.html">Moliyalashtirish</a></li>
+            <li><a href="results.html">Natijalarni joriy etish</a></li>
+          </ul>
+        </li>
+        <li><a href="projects.html">LOYIHALAR</a></li>
+        <li><a href="contacts.html">KONTAKTLAR</a></li>
+        <li><a href="news.html">YANGILIKLAR</a></li>
+        <li class="has-dropdown">
+          <a href="#">QO'SHIMCHA</a>
+          <ul class="dropdown">
+            <li><a href="gallery.html">Fotogalereya</a></li>
+            <li><a href="herbarium.html">Gerbariy</a></li>
+            <li><a href="library.html">Kutubxona</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </div>
+  </nav>
 
-    genetics: {
-      title: "Molekulyar Biologiya",
-      subtitle: "Genetik tadqiqotlar laboratoriyasi",
-      body: `
-        <h3>Laboratoriya haqida</h3>
-        <p>Molekulyar biologiya laboratoriyasi 2010-yilda tashkil etilgan. Zamonaviy uskunalar bilan jihozlangan ushbu laboratoriyada o'simliklar DNK/RNA darajasida o'rganiladi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>NGS</strong><span>Sekvenirlash</span></div>
-          <div class="modal-stat"><strong>500+</strong><span>Sekvenslar bazasi</span></div>
-          <div class="modal-stat"><strong>PCR</strong><span>Real-time tahlil</span></div>
-        </div>
-        <h3>Tadqiqot yo'nalishlari</h3>
-        <ul>
-          <li>O'simliklarning DNK barkodlanishi</li>
-          <li>Populyatsiya genetikasi va gen oqimi</li>
-          <li>Filogenetik daraxtlar qurish</li>
-          <li>Genetik xilma-xillik va konservatsiya genetikasi</li>
-          <li>Metabarkodlash va ekologik DNK (eDNA)</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Infratuzilma:</strong> Laboratoriyada Illumina MiSeq sekvenator, Bio-Rad CFX96 Real-Time PCR, ABI 3500 kapillyar elektroforez va to'liq molekulyar biologiya uskunalari mavjud.
-        </div>
-      `
-    },
-    ecology: {
-      title: "Ekologiya va Muhofaza",
-      subtitle: "O'simliklar muhofazasi dasturlari",
-      body: `
-        <h3>Ekologiya bo'limi</h3>
-        <p>Bo'limda O'zbekiston o'simlik qoplamining holati, dinamikasi va antropogen ta'sir ostidagi o'zgarishlar o'rganiladi. Qizil Kitob turlarini in-situ va ex-situ himoya qilish strategiyalari ishlab chiqiladi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>324</strong><span>Qizil Kitob turlari</span></div>
-          <div class="modal-stat"><strong>8</strong><span>Muhofaza hududlari</span></div>
-          <div class="modal-stat"><strong>15+</strong><span>Monitoring stansiyalari</span></div>
-        </div>
-        <h3>Asosiy faoliyatlar</h3>
-        <ul>
-          <li>O'simliklar Qizil Kitobini yangilash va qayta nashr etish</li>
-          <li>IUCN mezonlari bo'yicha turlarning xavflilik darajasini baholash</li>
-          <li>Muhim o'simlik hududlarini (IPA) aniqlash</li>
-          <li>Reintroduksiya va habitatni tiklash dasturlari</li>
-          <li>GIS va masofaviy zondlash asosida monitoring</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Muvaffaqiyat:</strong> 2023–2025 yillarda 5 ta noyob o'simlik turi muvaffaqiyatli ravishda tabiatga qayta joylashtirildi.
-        </div>
-      `
-    },
-    phyto: {
-      title: "Fitokimyo va Farmakognoziya",
-      subtitle: "Dorivor o'simliklar kimyosi",
-      body: `
-        <h3>Laboratoriya vazifalari</h3>
-        <p>Fitokimyo laboratoriyasida O'zbekiston dorivor o'simliklaridan biologik faol moddalar ajratiladi, ularning tuzilishi aniqlanadi va farmakologik xususiyatlari baholanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>600+</strong><span>Dorivor turlar</span></div>
-          <div class="modal-stat"><strong>150+</strong><span>Ajratilgan moddalar</span></div>
-          <div class="modal-stat"><strong>HPLC</strong><span>Tahlil usuli</span></div>
-        </div>
-        <h3>O'rganiladigan moddalar guruhi</h3>
-        <ul>
-          <li>Alkaloidlar va ularning farmakologik faolligi</li>
-          <li>Flavonoidlar va antioksidant xususiyatlari</li>
-          <li>Terpenoidlar (mono-, seskvi-, diterpenoidlar)</li>
-          <li>Kumarinlar va antimikrob xususiyatlari</li>
-          <li>Efir moylari — tarkibi va biologik faolligi</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Natija:</strong> Ferula turkumidan 12 ta yangi seskiviterpenoid modda ajratilgan, ulardan 3 tasi kuchli antimikrob faollik ko'rsatgan.
-        </div>
-      `
-    },
-    geography: {
-      title: "Botanik Geografiya",
-      subtitle: "Fitogeografiya va xaritalash",
-      body: `
-        <h3>Yo'nalish haqida</h3>
-        <p>Botanik geografiya bo'limida O'zbekiston hududidagi o'simliklarning tarqalishi, floristik viloyatlanish va geobotanik xaritalash ishlari olib boriladi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>14</strong><span>Floristik hudud</span></div>
-          <div class="modal-stat"><strong>GIS</strong><span>Xaritalash</span></div>
-          <div class="modal-stat"><strong>SDM</strong><span>Modellashtirish</span></div>
-        </div>
-        <h3>Tadqiqot yo'nalishlari</h3>
-        <ul>
-          <li>O'zbekistonning floristik rayonlanishi</li>
-          <li>O'simlik jamiyatlarini tasniflash (Braun-Blanquet tizimi)</li>
-          <li>Iqlim o'zgarishi ta'sirida arealni modellashtirish (MaxEnt, SDM)</li>
-          <li>O'simlik qoplamining masofaviy zondlash usuli bilan monitoring</li>
-          <li>Endemizm va relikt turlarning geografiyasi</li>
-        </ul>
-      `
-    },
+  <!-- HERO SLIDER -->
+  <section class="hero-slider">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1400&q=80')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>O'zbekiston Botanika Instituti</h2>
+        <p>O'simliklar dunyosini o'rganish, muhofaza qilish va kelajak avlodlarga yetkazish</p>
+        <a href="about.html" class="slide-btn">Batafsil →</a>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&q=80')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Laboratoriyalar</h2>
+        <p>Zamonaviy jihozlar bilan jihozlangan 6 ta ilmiy laboratoriya</p>
+        <a href="laboratories.html" class="slide-btn">Ko'rish →</a>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1400&q=80')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Ilmiy tadqiqotlar</h2>
+        <p>4300 dan ortiq o'simlik turi bo'yicha fundamental va amaliy tadqiqotlar</p>
+        <a href="research.html" class="slide-btn">Batafsil →</a>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="changeSlide(-1)">❮</button>
+      <button class="slider-btn" onclick="changeSlide(1)">❯</button>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+  </section>
 
+  <!-- WELCOME SECTION -->
+  <section class="welcome">
+    <div class="container welcome-grid">
+      <div class="welcome-text">
+        <h2>Institut haqida</h2>
+        <div class="breadcrumb">
+          <a href="index.html">Bosh sahifa</a> › <span>Biz haqimizda</span>
+        </div>
+        <p>O'zbekiston Fanlar Akademiyasi Botanika instituti 1938-yilda tashkil etilgan bo'lib, Markaziy Osiyo mintaqasida o'simliklar dunyosini o'rganish bo'yicha yetakchi ilmiy-tadqiqot markazi hisoblanadi.</p>
+        <p>Institut 85 yildan ortiq tarix davomida O'zbekiston florasini inventarizatsiya qilish, noyob turlarni muhofaza qilish va dorivor o'simliklarning kimyoviy tarkibini o'rganish bo'yicha fundamental tadqiqotlar olib bormoqda.</p>
+        <p>Institutning ilmiy gerbariyi (TASH) 1,5 million dan ortiq quritilgan o'simlik namunalarini o'z ichiga oladi — bu Markaziy Osiyo mintaqasidagi eng yirik to'plam.</p>
+        <a href="about.html" class="read-more">Batafsil o'qish →</a>
+      </div>
+      <div class="welcome-image">
+        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80" alt="Institut binosi">
+      </div>
+    </div>
+  </section>
 
-    biotech: {
-      title: "Biotexnologiya",
-      subtitle: "O'simlik to'qimalari madaniyati",
-      body: `
-        <h3>Biotexnologiya laboratoriyasi</h3>
-        <p>In vitro sharoitda o'simliklarni ko'paytirish, hujayra va to'qima madaniyatlarini yetishtirish, somatik embriogenez va organogenez jarayonlarini boshqarish bo'yicha tadqiqotlar.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>In vitro</strong><span>Ko'paytirish</span></div>
-          <div class="modal-stat"><strong>50+</strong><span>Protokollar</span></div>
-          <div class="modal-stat"><strong>Laminar</strong><span>Steril zona</span></div>
-        </div>
-        <h3>Asosiy texnologiyalar</h3>
-        <ul>
-          <li>Meristem madaniyati — virusfree ko'chatlar olish</li>
-          <li>Somatik embriogenez va adventiv poyadan regeneratsiya</li>
-          <li>Kallus madaniyati va seleksiya</li>
-          <li>Kriokonservatsiya — urug' va to'qimalarni muzlash</li>
-          <li>Akklimatizatsiya va tabiatga qayta joylash</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Amaliy qo'llanish:</strong> Qizil Kitobga kiritilgan 8 ta tur muvaffaqiyatli in vitro ko'paytirilgan va Botanik bog'ga o'tkazilgan.
-        </div>
-      `
-    },
-    project1: {
-      title: "Endemik o'simliklar genofondini saqlash",
-      subtitle: "Loyiha: FA-2024-15 | 2024–2027",
-      body: `
-        <h3>Loyiha maqsadi</h3>
-        <p>O'zbekiston hududidagi tor arealli endemik o'simlik turlarining genetik xilma-xilligini molekulyar usullar yordamida baholash va ex-situ konservatsiya strategiyasini ishlab chiqish.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>50</strong><span>Endemik turlar</span></div>
-          <div class="modal-stat"><strong>12</strong><span>Tadqiqotchilar</span></div>
-          <div class="modal-stat"><strong>3 yil</strong><span>Muddat</span></div>
-        </div>
-        <h3>Metodologiya</h3>
-        <ul>
-          <li>Mikrosatellit (SSR) markerlar yordamida genetik xilma-xillikni baholash</li>
-          <li>Populyatsiya orasidagi gen oqimini o'lchash</li>
-          <li>Minimum hayotiy populyatsiya hajmini aniqlash</li>
-          <li>Urug' banki va in vitro kolleksiya yaratish</li>
-        </ul>
-        <h3>Kutilayotgan natijalar</h3>
-        <p>50 ta endemik tur uchun genetik pasportlar yaratiladi, 20 ta tur uchun ex-situ konservatsiya protokollari ishlab chiqiladi, Milliy urug' banki fondi 30% ga boyitiladi.</p>
-      `
-    },
-    project2: {
-      title: "Dorivor o'simliklardan yangi antibiotiklar",
-      subtitle: "Xalqaro loyiha | 2023–2026",
-      body: `
-        <h3>Loyiha haqida</h3>
-        <p>Antibiotiklarga chidamlilik muammosiga javob sifatida O'zbekiston dorivor florasidan yangi antimikrob birikmalarni izlash va ularning ta'sir mexanizmini aniqlash.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>200+</strong><span>Skrining qilingan turlar</span></div>
-          <div class="modal-stat"><strong>8</strong><span>Tadqiqotchilar</span></div>
-          <div class="modal-stat"><strong>12</strong><span>Faol moddalar</span></div>
-        </div>
-        <h3>Ish bosqichlari</h3>
-        <ul>
-          <li>O'simlik ekstraktlarini tayyorlash va dastlabki skrining</li>
-          <li>Bioaktiv fraktsiyalarni HPLC bilan ajratish</li>
-          <li>NMR va MS yordamida tuzilishni aniqlash</li>
-          <li>MIC qiymatlarini aniqlash (S.aureus, E.coli, P.aeruginosa)</li>
-          <li>Sitotoksiklik va xavfsizlik testlari</li>
-        </ul>
-      `
-    },
-    project3: {
-      title: "Orolbo'yi o'simlik qoplami monitoringi",
-      subtitle: "UNESCO qo'llab-quvvatlagan loyiha | 2022–2026",
-      body: `
-        <h3>Loyiha maqsadi</h3>
-        <p>Orol dengizi qurib qolgan hududlarida o'simlik qoplamining tiklanish jarayonini kuzatish va iqlim o'zgarishining ta'sirini baholash.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>15</strong><span>Monitoring stansiyalari</span></div>
-          <div class="modal-stat"><strong>NDVI</strong><span>Sun'iy yo'ldosh tahlili</span></div>
-          <div class="modal-stat"><strong>5 yil</strong><span>Ma'lumotlar qatori</span></div>
-        </div>
-        <h3>Usullar</h3>
-        <ul>
-          <li>Sentinel-2 va Landsat sun'iy yo'ldosh tasvirlari tahlili</li>
-          <li>NDVI va EVI indekslari bo'yicha vegetatsiya dinamikasi</li>
-          <li>Yer ustki tekshiruvlar (transektlar, namunaviy maydonchalar)</li>
-          <li>Tuproq namligini masofaviy usulda aniqlash</li>
-          <li>Iqlim ma'lumotlari bilan korrelyatsion tahlil</li>
-        </ul>
-      `
-    },
-    project4: {
-      title: "In vitro noyob o'simliklarni ko'paytirish",
-      subtitle: "Loyiha: BT-2025-03 | 2025–2028",
-      body: `
-        <h3>Loyiha haqida</h3>
-        <p>Qizil Kitobga kiritilgan 10 ta o'simlik turini laboratoriya sharoitida mikro-ko'paytirish protokollarini ishlab chiqish va tabiatga muvaffaqiyatli reintroduksiya qilish.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>10</strong><span>Maqsadli turlar</span></div>
-          <div class="modal-stat"><strong>6</strong><span>Tadqiqotchilar</span></div>
-          <div class="modal-stat"><strong>1000+</strong><span>Rejadagi ko'chatlar</span></div>
-        </div>
-        <h3>Maqsadli turlar</h3>
-        <ul>
-          <li>Tulipa greigii — Greig lolasi</li>
-          <li>Ungernia victoris — Viktor ungeriyasi</li>
-          <li>Iris albertii — Olbert zambarug'i</li>
-          <li>Lepidium olgae — Olga xarsanoqguli</li>
-          <li>Juno bucharica — Buxoro junoniyasi</li>
-        </ul>
-      `
-    },
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon">🎓</div>
+        <strong>1</strong>
+        <span>Akademik</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">📜</div>
+        <strong>6</strong>
+        <span>Fan doktori</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">📋</div>
+        <strong>20</strong>
+        <span>Fan nomzodi</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">⚠️</div>
+        <strong>15</strong>
+        <span>Ilmiy xodim</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🌿</div>
+        <strong>4300+</strong>
+        <span>O'simlik turi</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🏛️</div>
+        <strong>6</strong>
+        <span>Laboratoriya</span>
+      </div>
+    </div>
+  </section>
 
+  <!-- QUICK LINKS -->
+  <section class="quick-links">
+    <div class="container">
+      <h2 class="section-title">Asosiy yo'nalishlar</h2>
+      <div class="qlinks-grid">
+        <a href="lab-flora.html" class="qlink-card">
+          <div class="qlink-icon">🌱</div>
+          <h3>Flora laboratoriyasi</h3>
+          <p>O'zbekiston florasini inventarizatsiya qilish va yangi turlarni aniqlash</p>
+        </a>
+        <a href="lab-geobotany.html" class="qlink-card">
+          <div class="qlink-icon">🗺️</div>
+          <h3>Geobotanika</h3>
+          <p>O'simlik jamoalarini xaritalash va fitogeografik tadqiqotlar</p>
+        </a>
+        <a href="lab-molecular.html" class="qlink-card">
+          <div class="qlink-icon">🧬</div>
+          <h3>Molekulyar biologiya</h3>
+          <p>DNK tahlili, filogenetika va genetik xilma-xillik tadqiqotlari</p>
+        </a>
+        <a href="lab-phytochemistry.html" class="qlink-card">
+          <div class="qlink-icon">⚗️</div>
+          <h3>Fitokimyo</h3>
+          <p>Dorivor o'simliklardan biologik faol moddalar ajratish</p>
+        </a>
+        <a href="lab-ecology.html" class="qlink-card">
+          <div class="qlink-icon">🌍</div>
+          <h3>Ekologiya</h3>
+          <p>Noyob turlarni muhofaza qilish va monitoring dasturlari</p>
+        </a>
+        <a href="lab-resources.html" class="qlink-card">
+          <div class="qlink-icon">📊</div>
+          <h3>Tabiiy resurslar</h3>
+          <p>O'simlik resurslarini baholash va barqaror foydalanish</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    plant1: {
-      title: "Olga xarsanoqguli",
-      subtitle: "Lepidium olgae Regel & Schmalh.",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Brassicaceae (Karamguldoshlar)<br>
-        <strong>Turkum:</strong> Lepidium<br>
-        <strong>Status:</strong> Endemik, Qizil Kitob (VU kategoriya)</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>VU</strong><span>IUCN statusi</span></div>
-          <div class="modal-stat"><strong>1500-2800m</strong><span>Balandlik</span></div>
-          <div class="modal-stat"><strong>3</strong><span>Ma'lum populyatsiya</span></div>
+  <!-- NEWS SECTION -->
+  <section class="news-section">
+    <div class="container">
+      <h2 class="section-title">So'nggi yangiliklar</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-date"><span>25</span>Iyun 2026</div>
+          <h3><a href="news.html">Chatqol tog'larida yangi o'simlik turi aniqlandi</a></h3>
+          <p>Ekspeditsiya jamoasi tomonidan Astragalus turkumiga mansub yangi tur topildi...</p>
         </div>
-        <h3>Tarqalishi</h3>
-        <p>O'zbekistonning g'arbiy Tyan-Shan tog' tizmasi, Chatqol va Qurama tizmalari. Faqat O'zbekiston hududida uchraydi — tor arealli endemik.</p>
-        <h3>Biologik xususiyatlari</h3>
-        <ul>
-          <li>Ko'p yillik o'simlik, balandligi 30-60 sm</li>
-          <li>Oq-pushti rangli mayda gullari bo'ladi</li>
-          <li>Toshloq va shag'alli yonbag'irlarda o'sadi</li>
-          <li>Iyun-iyul oylarida gullaydi</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Xavf omillari:</strong> Yaylov chorvachilik, tog' kon ishlari va iqlim o'zgarishi tufayli populyatsiya hajmi kamaymoqda.
+        <div class="news-card">
+          <div class="news-date"><span>18</span>Iyun 2026</div>
+          <h3><a href="news.html">Xalqaro ilmiy konferensiya o'tkazildi</a></h3>
+          <p>Markaziy Osiyo florasi bo'yicha xalqaro simpozium 15 davlat ishtirokida...</p>
         </div>
-      `
-    },
-    plant2: {
-      title: "Greig lolasi",
-      subtitle: "Tulipa greigii Regel",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Liliaceae (Lolalilar)<br>
-        <strong>Turkum:</strong> Tulipa<br>
-        <strong>Status:</strong> Noyob tur, Qizil Kitob (NT kategoriya)</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>NT</strong><span>IUCN statusi</span></div>
-          <div class="modal-stat"><strong>600-2500m</strong><span>Balandlik</span></div>
-          <div class="modal-stat"><strong>Aprel</strong><span>Gullaydigan vaqti</span></div>
+        <div class="news-card">
+          <div class="news-date"><span>10</span>Iyun 2026</div>
+          <h3><a href="news.html">Yangi laboratoriya jihozlari o'rnatildi</a></h3>
+          <p>Molekulyar biologiya laboratoriyasiga Illumina MiSeq sekvenator yetkazib berildi...</p>
         </div>
-        <h3>Tarqalishi</h3>
-        <p>G'arbiy Tyan-Shan, Qoratov va Nurota tog' tizmalari. O'zbekiston va Qozog'istonning chegaraviy hududlarida tarqalgan.</p>
-        <h3>Ahamiyati</h3>
-        <ul>
-          <li>Dunyodagi eng chiroyli yovvoyi lolalardan biri</li>
-          <li>Zamonaviy madaniy lola navlarining ajdodi</li>
-          <li>Barglari ustida xarakterli qo'ng'ir chiziqlar bo'ladi</li>
-          <li>Guli qizil-to'q sariq, diametri 12 sm gacha</li>
-        </ul>
-      `
-    },
-    plant3: {
-      title: "Suvorov piyozi",
-      subtitle: "Allium suvorovii Regel",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Amaryllidaceae<br>
-        <strong>Turkum:</strong> Allium<br>
-        <strong>Status:</strong> Endemik, mahalliy oziq-ovqat manbai</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>LC</strong><span>Statusi</span></div>
-          <div class="modal-stat"><strong>1200-2000m</strong><span>Balandlik</span></div>
-          <div class="modal-stat"><strong>Anzur</strong><span>Mahalliy nomi</span></div>
-        </div>
-        <h3>Tarqalishi va foydalanishi</h3>
-        <p>Pamir-Oloy va G'arbiy Tyan-Shan tog'larida o'sadi. Mahalliy aholisi tomonidan "anzur" nomi bilan taniladi va oziq-ovqatda keng qo'llanadi.</p>
-        <ul>
-          <li>Piyozining og'irligi 200-300 gramm</li>
-          <li>Vitaminlar (C, E, B) va minerallar boyitilgan</li>
-          <li>An'anaviy tibbiyotda immunitetni mustahkamlash uchun ishlatiladi</li>
-          <li>Bahorgi sabzavot sifatida madaniy ekiladi</li>
-        </ul>
-      `
-    },
-    plant4: {
-      title: "Kovrak",
-      subtitle: "Ferula foetida (Bunge) Regel",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Apiaceae (Soyabonguldoshlar)<br>
-        <strong>Turkum:</strong> Ferula<br>
-        <strong>Status:</strong> Keng tarqalgan dorivor o'simlik</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>LC</strong><span>Statusi</span></div>
-          <div class="modal-stat"><strong>2m</strong><span>Balandligi</span></div>
-          <div class="modal-stat"><strong>Efir moyi</strong><span>Asosiy mahsulot</span></div>
-        </div>
-        <h3>Foydalanish sohalari</h3>
-        <ul>
-          <li>Ildizidan olinadigan smola (asafetida) — ziravorlar sanoatida</li>
-          <li>Efir moyi — parfyumeriya va farmatsevtika</li>
-          <li>An'anaviy tibbiyotda hazm tizimini davolashda</li>
-          <li>Antimikrob va yallig'lanishga qarshi xususiyatlari isbotlangan</li>
-        </ul>
-      `
-    },
-    plant5: {
-      title: "Olbert zambarug'i",
-      subtitle: "Iris albertii Regel",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Iridaceae<br>
-        <strong>Turkum:</strong> Iris<br>
-        <strong>Status:</strong> Noyob, Qizil Kitob (VU)</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>VU</strong><span>IUCN statusi</span></div>
-          <div class="modal-stat"><strong>Binafsha</strong><span>Gul rangi</span></div>
-          <div class="modal-stat"><strong>May</strong><span>Gullaydigan vaqti</span></div>
-        </div>
-        <h3>Xususiyatlari</h3>
-        <ul>
-          <li>Balandligi 40-70 sm, kuchli ildizpoyali</li>
-          <li>To'q binafsha rangli yirik gullari bor</li>
-          <li>Toshloq yonbag'irlar va cho'l zonasida o'sadi</li>
-          <li>Madaniy parklarni bezash uchun istiqbolli</li>
-        </ul>
-      `
-    },
-    plant6: {
-      title: "O'zbek shuvoqi",
-      subtitle: "Astragalus uzbekistanicus",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Fabaceae (Dukkaklilar)<br>
-        <strong>Turkum:</strong> Astragalus<br>
-        <strong>Status:</strong> Endemik (faqat O'zbekistonda)</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>EN</strong><span>IUCN statusi</span></div>
-          <div class="modal-stat"><strong>1</strong><span>Populyatsiya</span></div>
-          <div class="modal-stat"><strong>Faqat UZ</strong><span>Areal</span></div>
-        </div>
-        <h3>Biologiyasi</h3>
-        <p>Tor arealli endemik, faqat O'zbekistonning cheklangan hududida uchraydi. Populyatsiyasi juda kichik, muhofaza choralarini taqozo etadi.</p>
-      `
-    },
-    plant7: {
-      title: "Yong'oq daraxti",
-      subtitle: "Juglans regia L.",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Juglandaceae<br>
-        <strong>Turkum:</strong> Juglans<br>
-        <strong>Status:</strong> Keng tarqalgan, madaniy ekiladi</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>LC</strong><span>Statusi</span></div>
-          <div class="modal-stat"><strong>25m</strong><span>Balandligi</span></div>
-          <div class="modal-stat"><strong>300+</strong><span>Yil umri</span></div>
-        </div>
-        <h3>Xususiyatlari</h3>
-        <ul>
-          <li>O'zbekistonda qadimdan ekiladigan mevali daraxt</li>
-          <li>Yovvoyi shakllari tog' o'rmonlarida uchraydi</li>
-          <li>Mevalari omega-3 yog' kislotalari bilan boy</li>
-          <li>Yog'och — qimmatbaho mebel materiali</li>
-        </ul>
-      `
-    },
-    plant8: {
-      title: "Viktor ungeriyasi",
-      subtitle: "Ungernia victoris Vved.",
-      body: `
-        <h3>Taksonomik ma'lumot</h3>
-        <p><strong>Oila:</strong> Amaryllidaceae<br>
-        <strong>Turkum:</strong> Ungernia<br>
-        <strong>Status:</strong> Noyob, dorivor tur</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>VU</strong><span>IUCN statusi</span></div>
-          <div class="modal-stat"><strong>Galantamin</strong><span>Faol modda</span></div>
-          <div class="modal-stat"><strong>Altsxaymer</strong><span>Davolash</span></div>
-        </div>
-        <h3>Dorivor ahamiyati</h3>
-        <p>Bu o'simlikdan galantamin alkaloidasi olinadi — Altsxaymer kasalligini davolashda qo'llaniladigan muhim farmatsevtik modda.</p>
-        <ul>
-          <li>Piyozidan galantamin va likorin ajratiladi</li>
-          <li>Xolinesteraza ingibitori sifatida ta'sir qiladi</li>
-          <li>Sanoat miqyosida yig'ish cheklangan (Qizil Kitob)</li>
-          <li>In vitro ko'paytirish usullari ishlab chiqilmoqda</li>
-        </ul>
-      `
-    },
+      </div>
+      <a href="news.html" class="view-all-btn">Barcha yangiliklar →</a>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Botanika Instituti</h4>
+        <p>O'zbekiston Fanlar Akademiyasi tarkibidagi yetakchi ilmiy-tadqiqot muassasasi. 1938-yildan buyon faoliyat yuritadi.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tezkor havolalar</h4>
+        <ul>
+          <li><a href="about.html">Biz haqimizda</a></li>
+          <li><a href="structure.html">Struktura</a></li>
+          <li><a href="research.html">Ilmiy faoliyat</a></li>
+          <li><a href="laboratories.html">Laboratoriyalar</a></li>
+          <li><a href="publications.html">Nashrlar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Laboratoriyalar</h4>
+        <ul>
+          <li><a href="lab-flora.html">Flora laboratoriyasi</a></li>
+          <li><a href="lab-geobotany.html">Geobotanika</a></li>
+          <li><a href="lab-molecular.html">Molekulyar biologiya</a></li>
+          <li><a href="lab-phytochemistry.html">Fitokimyo</a></li>
+          <li><a href="lab-ecology.html">Ekologiya</a></li>
+          <li><a href="lab-resources.html">Tabiiy resurslar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aloqa</h4>
+        <p>📍 100125, Toshkent sh., Durmon yo'li ko'ch., 32</p>
+        <p>📞 (+998 71) 262-37-95</p>
+        <p>📧 info@botany.uz</p>
+        <p>🌐 www.botany.uz</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Botanika Instituti. Barcha huquqlar himoyalangan.</p>
+      </div>
+    </div>
+  </footer>
 
-    equip1: {
-      title: "Elektron Mikroskop",
-      subtitle: "JEOL JSM-7800F — Field Emission SEM",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Yuqori aniqlikdagi maydonli emissiyali skanerlash elektron mikroskopi. O'simlik to'qimalari, pollenlari va urug'larining ultra-nozik tuzilishini o'rganish uchun qo'llanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>0.8nm</strong><span>Rezolyutsiya</span></div>
-          <div class="modal-stat"><strong>x1,000,000</strong><span>Kattalashtirish</span></div>
-          <div class="modal-stat"><strong>EDS</strong><span>Element tahlili</span></div>
-        </div>
-        <h3>Qo'llanish sohalari</h3>
-        <ul>
-          <li>Pollen morfologiyasi va pollinologik tadqiqotlar</li>
-          <li>Barg yuzasi mikrotuzilmasi (stomata, trixomlar)</li>
-          <li>Urug' qobig'i morfologiyasi (taksonomik belgi)</li>
-          <li>Mikoriza va patogen zamburug'lar tuzilishi</li>
-        </ul>
-      `
-    },
-    equip2: {
-      title: "PCR Termosikler",
-      subtitle: "Bio-Rad CFX96 Touch Real-Time PCR",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Real-vaqt rejimida polimeraz zanjir reaktsiyasini o'tkazish uchun mo'ljallangan zamonaviy termosikler. Gen ekspressiyasi tahlili va DNA barkodlashda qo'llanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>96</strong><span>Qudoqchalar</span></div>
-          <div class="modal-stat"><strong>6</strong><span>Fluorestsent kanallari</span></div>
-          <div class="modal-stat"><strong>&lt;30 min</strong><span>Tez protokol</span></div>
-        </div>
-        <h3>Qo'llanish sohalari</h3>
-        <ul>
-          <li>DNK barkodlash (ITS, matK, rbcL markerlar)</li>
-          <li>Gen ekspressiyasi miqdoriy tahlili (qPCR)</li>
-          <li>Pathogen diagnostikasi o'simliklarda</li>
-          <li>Populyatsiya genetikasi uchun SSR markerlar</li>
-        </ul>
-      `
-    },
-    equip3: {
-      title: "HPLC Xromatograf",
-      subtitle: "Agilent 1260 Infinity II HPLC",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Yuqori samarali suyuqlik xromatografiyasi tizimi. O'simlik ekstraktlaridan individual birikmalarni ajratish va identifikatsiya qilish uchun asosiy asbob.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>DAD</strong><span>Detektor turi</span></div>
-          <div class="modal-stat"><strong>600 bar</strong><span>Max bosim</span></div>
-          <div class="modal-stat"><strong>Autosampler</strong><span>Avtomatik</span></div>
-        </div>
-        <h3>Qo'llanish sohalari</h3>
-        <ul>
-          <li>Flavonoid va fenol birikmalarni aniqlash</li>
-          <li>Alkaloid tarkibini miqdoriy tahlil qilish</li>
-          <li>Efir moyi komponentlarini ajratish</li>
-          <li>Farmakopeya standartlariga moslashgan usullar</li>
-        </ul>
-      `
-    },
-    equip4: {
-      title: "UV-Vis Spektrofotometr",
-      subtitle: "Shimadzu UV-1900i",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Ikki nurli UV-ko'rinadigan spektrofotometr. O'simlik pigmentlari, fermentlar va metabolitlarning yutilish spektrlarini olish va miqdoriy aniqlash uchun.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>190-1100</strong><span>nm diapazon</span></div>
-          <div class="modal-stat"><strong>0.1nm</strong><span>Aniqlik</span></div>
-          <div class="modal-stat"><strong>Dual beam</strong><span>Optik sxema</span></div>
-        </div>
-        <h3>Qo'llanish</h3>
-        <ul>
-          <li>Xlorofill a, b va karotinoid miqdorini aniqlash</li>
-          <li>Umumiy fenol va flavonoid miqdori (Folin-Ciocalteu)</li>
-          <li>Antioksidant faollik (DPPH, ABTS usullari)</li>
-          <li>Oqsil konsentratsiyasini aniqlash (Bradford)</li>
-        </ul>
-      `
-    },
-    equip5: {
-      title: "Fitotron Kamera",
-      subtitle: "Percival E-36L Growth Chamber",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Boshqariladigan muhit kamerasi — o'simliklarni aniq berilgan sharoitlarda (harorat, yorug'lik, namlik) yetishtirish uchun. Fenologik tajribalar va stress fiziologiyasi tadqiqotlarida qo'llanadi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>-10...+50</strong><span>&#176;C diapazon</span></div>
-          <div class="modal-stat"><strong>LED</strong><span>Yorug'lik manbai</span></div>
-          <div class="modal-stat"><strong>CO2</strong><span>Nazorat</span></div>
-        </div>
-        <h3>Tajribalar</h3>
-        <ul>
-          <li>Fotoperiodizm — kun uzunligining ta'sirini o'rganish</li>
-          <li>Harorat stressi va chidamlilik tadqiqotlari</li>
-          <li>Qurg'oqchilikka chidamlilik testlari</li>
-          <li>Urug' unuvchanligini aniqlash</li>
-        </ul>
-      `
-    },
-    equip6: {
-      title: "DNA Sekvenator",
-      subtitle: "Illumina MiSeq — Next-Gen Sequencer",
-      body: `
-        <h3>Qurilma haqida</h3>
-        <p>Yangi avlod sekvenirlash (NGS) platformasi. Butun genom, transkriptom va amplikonlarni massiv ravishda sekvenirlash imkonini beradi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>15 Gb</strong><span>Bir ishlashda</span></div>
-          <div class="modal-stat"><strong>2x300bp</strong><span>O'qish uzunligi</span></div>
-          <div class="modal-stat"><strong>25M</strong><span>Reads per run</span></div>
-        </div>
-        <h3>Qo'llanish sohalari</h3>
-        <ul>
-          <li>O'simlik genomlarini de novo yig'ish</li>
-          <li>Transkriptom tahlili (RNA-Seq)</li>
-          <li>Metabarkodlash — tuproq va suv namunalarida biodiversitet</li>
-          <li>SNP aniqlash va assotsiativ xaritalash</li>
-        </ul>
-      `
-    },
-
-
-    pub1: {
-      title: "O'zbekiston florasiga yangi qo'shimchalar",
-      subtitle: "2026, Phytotaxa jurnali",
-      body: `
-        <h3>Maqola haqida</h3>
-        <p>Chatqol va Hisor tog' tizmalarida 2024–2025 yillardagi dala tadqiqotlari natijasida O'zbekiston florasi uchun yangi bo'lgan 15 ta o'simlik turi qayd etildi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>15</strong><span>Yangi turlar</span></div>
-          <div class="modal-stat"><strong>Q1</strong><span>Jurnal reytingi</span></div>
-          <div class="modal-stat"><strong>IF: 1.3</strong><span>Impact Factor</span></div>
-        </div>
-        <h3>Asosiy natijalar</h3>
-        <ul>
-          <li>7 ta tur Astragalus turkumiga mansub</li>
-          <li>3 ta tur Allium turkumidan</li>
-          <li>5 ta tur boshqa turli oilalardan</li>
-          <li>2 ta tur fan uchun mutlaqo yangi sifatida tavsiflangan</li>
-        </ul>
-        <p><strong>Mualliflar:</strong> Shomurodov K.Sh., Beshko N.Yu., Abdullaev A.K.</p>
-        <p><strong>Jurnal:</strong> Phytotaxa, 2026, vol. 645(2): 101-118</p>
-      `
-    },
-    pub2: {
-      title: "Ferula fitokimyosi va antimikrob xususiyatlari",
-      subtitle: "2025, Phytochemistry jurnali",
-      body: `
-        <h3>Maqola haqida</h3>
-        <p>Ferula foetida va F. kuhistanica turlarining yer usti qismlaridan 12 ta yangi va 28 ta oldindan ma'lum birikma ajratildi. Antimikrob faollik testi o'tkazildi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>12</strong><span>Yangi birikmalar</span></div>
-          <div class="modal-stat"><strong>Q1</strong><span>Jurnal</span></div>
-          <div class="modal-stat"><strong>MIC</strong><span>Test turi</span></div>
-        </div>
-        <h3>Asosiy natijalar</h3>
-        <ul>
-          <li>3 ta yangi kumarin S.aureus ga qarshi faol (MIC 8 mg/mL)</li>
-          <li>2 ta seskviterpen E.coli ga ta'sir ko'rsatdi</li>
-          <li>Sitotoksiklik testida xavfsiz deb topildi (IC50 > 100 mg/mL)</li>
-        </ul>
-        <p><strong>Jurnal:</strong> Phytochemistry, 2025, vol. 229: 114205</p>
-      `
-    },
-    pub3: {
-      title: "Orolbo'yi vegetatsiya dinamikasi",
-      subtitle: "2025, Remote Sensing of Environment",
-      body: `
-        <h3>Maqola haqida</h3>
-        <p>Sentinel-2 va Landsat-8 sun'iy yo'ldosh ma'lumotlari asosida 2020-2025 yillarda Orol dengizi qurib qolgan hududlarida o'simlik qoplamining o'zgarishi tahlil qilindi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>NDVI</strong><span>Asosiy indeks</span></div>
-          <div class="modal-stat"><strong>+18%</strong><span>Vegetatsiya o'sishi</span></div>
-          <div class="modal-stat"><strong>5 yil</strong><span>Kuzatuv davri</span></div>
-        </div>
-        <h3>Xulosalar</h3>
-        <ul>
-          <li>Saxovul (Haloxylon) ekinlari tufayli vegetatsiya 18% ga oshgan</li>
-          <li>Tamirix va Calligonum turlarining tabiiy tarqalishi kuzatildi</li>
-          <li>G'arbiy hududlarda sho'rlanish tufayli vegetatsiya pasaygan</li>
-        </ul>
-        <p><strong>Jurnal:</strong> Remote Sensing of Environment, 2025, vol. 312: 114332</p>
-      `
-    },
-    pub4: {
-      title: "Markaziy Osiyo lolalari filogenetikasi",
-      subtitle: "2024, Molecular Phylogenetics and Evolution",
-      body: `
-        <h3>Maqola haqida</h3>
-        <p>Markaziy Osiyoda tarqalgan Tulipa turkumining 28 ta turidan ITS va matK genlarining sekvenslarini taqqoslash orqali filogenetik munosabatlar aniqlandi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>28</strong><span>Tahlil qilingan turlar</span></div>
-          <div class="modal-stat"><strong>ITS+matK</strong><span>Markerlar</span></div>
-          <div class="modal-stat"><strong>Bayesian</strong><span>Tahlil usuli</span></div>
-        </div>
-        <h3>Asosiy natijalar</h3>
-        <ul>
-          <li>3 ta yangi kladlar aniqlandi</li>
-          <li>T.greigii va T.kaufmanniana bir kladga kiritildi</li>
-          <li>5 ta turning taksonomik statusi qayta ko'rib chiqildi</li>
-        </ul>
-        <p><strong>Jurnal:</strong> Molecular Phylogenetics and Evolution, 2024, vol. 201: 108127</p>
-      `
-    },
-
-
-    team1: {
-      title: "Tojibaev Komiljon Shanazarovich",
-      subtitle: "Direktor, biologiya fanlari doktori, professor",
-      body: `
-        <h3>Ilmiy faoliyati</h3>
-        <p>O'zbekiston Botanika institutining direktori. Sistematika, botanik geografiya va flora inventarizatsiyasi bo'yicha yetakchi mutaxassis. 200 dan ortiq ilmiy maqola muallifi.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>200+</strong><span>Maqolalar</span></div>
-          <div class="modal-stat"><strong>h-20</strong><span>Hirsch indeksi</span></div>
-          <div class="modal-stat"><strong>25+</strong><span>Yillik tajriba</span></div>
-        </div>
-        <h3>Asosiy yo'nalishlari</h3>
-        <ul>
-          <li>O'zbekiston va Markaziy Osiyo florasining sistematikasi</li>
-          <li>Fitogeografiya va floristik rayonlanish</li>
-          <li>Gerbariy fondi boshqaruvi va digitalizatsiya</li>
-          <li>Xalqaro hamkorlik loyihalari rahbariyati</li>
-        </ul>
-      `
-    },
-    team2: {
-      title: "Beshko Natalya Yurievna",
-      subtitle: "Laboratoriya mudiri, PhD",
-      body: `
-        <h3>Ilmiy faoliyati</h3>
-        <p>Flora inventarizatsiyasi va geobotanika bo'yicha mutaxassis. O'zbekiston florasining regional kadastrlarini tuzish bo'yicha katta tajribaga ega.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>80+</strong><span>Maqolalar</span></div>
-          <div class="modal-stat"><strong>h-12</strong><span>Hirsch indeksi</span></div>
-          <div class="modal-stat"><strong>Geobotanika</strong><span>Ixtisoslik</span></div>
-        </div>
-        <h3>Tadqiqot sohalari</h3>
-        <ul>
-          <li>Hududiy floralarni inventarizatsiya qilish</li>
-          <li>O'simlik jamoalarini tasniflash</li>
-          <li>Dala ekspeditsiyalarni tashkil etish va boshqarish</li>
-          <li>Botanik ma'lumotlar bazalarini yaratish</li>
-        </ul>
-      `
-    },
-    team3: {
-      title: "Mamadalieva Nilufar Zakirovna",
-      subtitle: "Fitokimyo laboratoriyasi mudiri, DSc",
-      body: `
-        <h3>Ilmiy faoliyati</h3>
-        <p>Dorivor o'simliklar kimyosi, farmakognoziya va biologik faol moddalar tadqiqoti bo'yicha yetakchi olim. Xalqaro darajada tan olingan mutaxassis.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>150+</strong><span>Maqolalar</span></div>
-          <div class="modal-stat"><strong>h-25</strong><span>Hirsch indeksi</span></div>
-          <div class="modal-stat"><strong>5</strong><span>Patentlar</span></div>
-        </div>
-        <h3>Asosiy yutuqlari</h3>
-        <ul>
-          <li>100 dan ortiq yangi biologik faol modda ajratilgan</li>
-          <li>Ferula va Achillea turkumlarida ixtisoslashgan</li>
-          <li>Germaniya, Xitoy va Turkiya universitetlari bilan hamkorlik</li>
-          <li>Yosh olimlar tayyorlash — 10+ PhD rahbariyati</li>
-        </ul>
-      `
-    },
-    team4: {
-      title: "Shomurodov Khabibullo Fatulloyevich",
-      subtitle: "Ekologiya bo'limi boshlig'i, PhD",
-      body: `
-        <h3>Ilmiy faoliyati</h3>
-        <p>O'simliklar ekologiyasi, konservatsiya biologiyasi va muhofaza hududlarini boshqarish bo'yicha mutaxassis.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>90+</strong><span>Maqolalar</span></div>
-          <div class="modal-stat"><strong>IUCN</strong><span>Ekspert</span></div>
-          <div class="modal-stat"><strong>IPA</strong><span>Loyiha rahbari</span></div>
-        </div>
-        <h3>Tadqiqot sohalari</h3>
-        <ul>
-          <li>Noyob turlar populyatsiyasi monitoringi</li>
-          <li>Muhim o'simlik hududlari (IPA) aniqlash</li>
-          <li>Qizil Kitob turlarini baholash (IUCN mezonlari)</li>
-          <li>Ekologik niche modellashtirish</li>
-        </ul>
-      `
-    },
-    team5: {
-      title: "Tashpulatov Javlon Jumanovich",
-      subtitle: "GIS va masofaviy zondlash mutaxassisi",
-      body: `
-        <h3>Ilmiy faoliyati</h3>
-        <p>Geografik axborot tizimlari (GIS) va masofaviy zondlash usullarini botanik tadqiqotlarga qo'llash bo'yicha mutaxassis.</p>
-        <div class="modal-stats">
-          <div class="modal-stat"><strong>QGIS</strong><span>Asosiy vosita</span></div>
-          <div class="modal-stat"><strong>Python</strong><span>Dasturlash</span></div>
-          <div class="modal-stat"><strong>R</strong><span>Statistika</span></div>
-        </div>
-        <h3>Vazifalari</h3>
-        <ul>
-          <li>Sun'iy yo'ldosh tasvirlarini tahlil qilish</li>
-          <li>O'simlik tarqalish xaritalarini yaratish</li>
-          <li>MaxEnt va SDM modellari bilan ishlash</li>
-          <li>Orolbo'yi monitoring loyihasida GIS qo'llab-quvvatlash</li>
-        </ul>
-      `
-    }
-  };
-
-
-  // ===== MODAL FUNCTIONS =====
-  function openModal(id) {
-    const data = modals[id];
-    if (!data) return;
-    document.getElementById('modalTitle').textContent = data.title;
-    document.getElementById('modalSubtitle').textContent = data.subtitle;
-    document.getElementById('modalBody').innerHTML = data.body;
-    document.getElementById('modalOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  function closeModalOnOverlay(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  // ===== NAVBAR SCROLL =====
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-  });
-
-  // ===== HAMBURGER MENU =====
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-
-  // ===== HERO PARTICLES =====
-  (function createParticles() {
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 20; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random() * 12 + 4;
-      p.style.cssText = `
-        width:${size}px; height:${size}px;
-        left:${Math.random()*100}%;
-        animation-duration:${Math.random()*8+6}s;
-        animation-delay:${Math.random()*6}s;
-      `;
-      container.appendChild(p);
-    }
-  })();
-
-  // ===== PLANTS FILTER =====
-  function filterPlants(type, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.plant-card').forEach(card => {
-      if (type === 'all' || card.dataset.type === type) {
-        card.style.display = '';
-        card.style.animation = 'fadeUp .5s ease both';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-  // ===== SCROLL REVEAL =====
-  const revealElements = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  revealElements.forEach(el => observer.observe(el));
-
-  // ===== SMOOTH SCROLL FOR NAV LINKS =====
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
