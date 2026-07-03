@@ -1,0 +1,79 @@
+<!-- HERO SLIDER -->
+<section class="hero-slider">
+  <div *ngFor="let slide of slides; let i = index"
+       class="slide" [class.active]="i === currentSlide"
+       [style.background-image]="'url(' + slide.image + ')'">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <h2>{{ slide.title }}</h2>
+      <p>{{ slide.desc }}</p>
+      <a [routerLink]="slide.link" class="slide-btn">Batafsil →</a>
+    </div>
+  </div>
+  <div class="slider-controls">
+    <button class="slider-btn" (click)="prevSlide()">❮</button>
+    <button class="slider-btn" (click)="nextSlide()">❯</button>
+  </div>
+  <div class="slider-dots">
+    <span *ngFor="let slide of slides; let i = index"
+          class="slider-dot" [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"></span>
+  </div>
+</section>
+
+<!-- WELCOME -->
+<section class="welcome">
+  <div class="container welcome-grid">
+    <div class="welcome-text">
+      <h2>Institut haqida</h2>
+      <div class="breadcrumb-home"><a routerLink="/">Bosh sahifa</a> › <span>Biz haqimizda</span></div>
+      <p>O'zbekiston Fanlar Akademiyasi Botanika instituti 1938-yilda tashkil etilgan bo'lib, Markaziy Osiyo mintaqasida o'simliklar dunyosini o'rganish bo'yicha yetakchi ilmiy-tadqiqot markazi hisoblanadi.</p>
+      <p>Institut 85 yildan ortiq tarix davomida O'zbekiston florasini inventarizatsiya qilish, noyob turlarni muhofaza qilish va dorivor o'simliklarning kimyoviy tarkibini o'rganish bo'yicha fundamental tadqiqotlar olib bormoqda.</p>
+      <a routerLink="/about" class="read-more">Batafsil o'qish →</a>
+    </div>
+    <div class="welcome-image">
+      <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80" alt="Institut binosi">
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container stats-grid">
+    <div class="stat-item" *ngFor="let stat of stats">
+      <div class="stat-icon">{{ stat.icon }}</div>
+      <strong>{{ stat.value }}</strong>
+      <span>{{ stat.label }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section class="quick-links">
+  <div class="container">
+    <h2 class="section-title">Asosiy yo'nalishlar</h2>
+    <div class="qlinks-grid">
+      <a routerLink="/lab-flora" class="qlink-card"><div class="qlink-icon">🌱</div><h3>Flora laboratoriyasi</h3><p>O'zbekiston florasini inventarizatsiya qilish</p></a>
+      <a routerLink="/lab-geobotany" class="qlink-card"><div class="qlink-icon">🗺️</div><h3>Geobotanika</h3><p>O'simlik jamoalarini xaritalash</p></a>
+      <a routerLink="/lab-molecular" class="qlink-card"><div class="qlink-icon">🧬</div><h3>Molekulyar biologiya</h3><p>DNK tahlili va filogenetika</p></a>
+      <a routerLink="/lab-phytochemistry" class="qlink-card"><div class="qlink-icon">⚗️</div><h3>Fitokimyo</h3><p>Dorivor o'simliklardan moddalar ajratish</p></a>
+      <a routerLink="/lab-ecology" class="qlink-card"><div class="qlink-icon">🌍</div><h3>Ekologiya</h3><p>Noyob turlarni muhofaza qilish</p></a>
+      <a routerLink="/lab-resources" class="qlink-card"><div class="qlink-icon">📊</div><h3>Tabiiy resurslar</h3><p>O'simlik resurslarini baholash</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-section">
+  <div class="container">
+    <h2 class="section-title">So'nggi yangiliklar</h2>
+    <div class="news-grid">
+      <div class="news-card" *ngFor="let item of news">
+        <div class="news-date"><span>{{ item.day }}</span>{{ item.month }}</div>
+        <h3><a routerLink="/news">{{ item.title }}</a></h3>
+        <p>{{ item.excerpt }}</p>
+      </div>
+    </div>
+    <a routerLink="/news" class="view-all-btn">Barcha yangiliklar →</a>
+  </div>
+</section>

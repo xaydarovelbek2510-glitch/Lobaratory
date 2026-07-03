@@ -1,0 +1,30 @@
+.topbar { background: #333; color: #ccc; font-size: 12px; padding: 6px 0; }
+.topbar-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.topbar-langs { display: flex; gap: 12px; }
+.topbar-langs a { color: #aaa; font-weight: 600; letter-spacing: .5px; text-decoration: none; }
+.topbar-langs a.active { color: #fff; }
+.topbar-langs a:hover { color: #fff; }
+.topbar-address span { color: #bbb; }
+
+.header { background: #fff; padding: 15px 0; border-bottom: 1px solid #e0e0e0; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-icon { width: 60px; height: 60px; background: linear-gradient(135deg, #2e7d32, #4caf50); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.logo-text strong { display: block; font-size: 18px; color: #1b5e20; letter-spacing: .5px; }
+.logo-text span { font-size: 11px; color: #666; letter-spacing: .3px; }
+.header-contacts { display: flex; align-items: center; gap: 25px; }
+.header-contact-item { display: flex; align-items: center; gap: 8px; }
+.hc-icon { font-size: 20px; }
+.header-contact-item small { display: block; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: .5px; }
+.header-contact-item strong { font-size: 14px; color: #333; }
+.header-cta {
+  background: #e65100; color: #fff; padding: 10px 24px;
+  border-radius: 4px; font-weight: 700; font-size: 13px;
+  letter-spacing: .5px; text-decoration: none; transition: background .3s;
+}
+.header-cta:hover { background: #ff6d00; }
+
+@media (max-width: 768px) {
+  .header-contacts { display: none; }
+  .topbar-address { display: none; }
+}
