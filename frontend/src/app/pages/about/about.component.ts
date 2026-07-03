@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
 
-@Component({ selector: 'app-about', standalone: true, imports: [SidebarComponent, RouterLink],
+@Component({
+  selector: 'app-about',
+  standalone: true,
+  imports: [SidebarComponent, RouterLink],
   template: `
     <div class="page-header"><div class="container"><h1>Biz haqimizda</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <span>Biz haqimizda</span></div></div></div>
     <section class="page-content"><div class="container page-grid">
@@ -14,11 +17,10 @@ import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.
         <h3>Asosiy vazifalar</h3>
         <ul><li>O'zbekiston florasini inventarizatsiya qilish</li><li>Noyob turlarni muhofaza qilish</li><li>Dorivor o'simliklarni o'rganish</li><li>Ekologik monitoring</li><li>Yosh olimlar tayyorlash</li><li>Xalqaro hamkorlik</li></ul>
         <div class="stats-mini"><div class="stat-mini"><strong>4300+</strong><span>O'simlik turi</span></div><div class="stat-mini"><strong>1.5M+</strong><span>Gerbariy</span></div><div class="stat-mini"><strong>85+</strong><span>Yillik tarix</span></div></div>
-        <h3>Xalqaro hamkorlik</h3>
-        <ul><li>Kew Royal Botanic Gardens (Buyuk Britaniya)</li><li>Missouri Botanical Garden (AQSh)</li><li>Martin-Lyuter universiteti (Germaniya)</li><li>Kunming Botanika instituti (Xitoy)</li></ul>
       </div>
     </div></section>
-  ` })
+  `
+})
 export class AboutComponent {
   links: SidebarLink[] = [
     { label: 'Biz haqimizda', route: '/about' },

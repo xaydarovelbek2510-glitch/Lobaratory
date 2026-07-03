@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
-@Component({ selector: 'app-research', standalone: true, imports: [SidebarComponent, RouterLink],
+
+@Component({
+  selector: 'app-research',
+  standalone: true,
+  imports: [SidebarComponent, RouterLink],
   template: `
     <div class="page-header"><div class="container"><h1>Ilmiy faoliyat</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <span>Ilmiy faoliyat</span></div></div></div>
     <section class="page-content"><div class="container page-grid">
@@ -15,10 +19,11 @@ import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.
         <h3>4. Ekologiya</h3><p>Muhofaza va monitoring.</p>
         <h3>5. Geobotanika</h3><p>Xaritalash va rayonlanish.</p>
         <h3>6. Tabiiy resurslar</h3><p>Resurslarni baholash.</p>
-        <div class="info-box"><p><strong>2020–2026:</strong> 350+ maqola, 15+ xalqaro grant, 50+ yangi tur.</p></div>
+        <div class="info-box"><p><strong>2020-2026:</strong> 350+ maqola, 15+ xalqaro grant, 50+ yangi tur.</p></div>
       </div>
     </div></section>
-  ` })
+  `
+})
 export class ResearchComponent {
   links: SidebarLink[] = [{ label: 'Ilmiy yo\'nalishlar', route: '/research' }, { label: 'Loyihalar', route: '/projects' }];
 }

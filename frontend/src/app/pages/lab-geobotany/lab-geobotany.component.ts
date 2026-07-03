@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -12,10 +12,10 @@ import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.
       <app-sidebar [title]="'LABORATORIYALAR'" [links]="labLinks"></app-sidebar>
       <div class="main-content">
         <h2>Geobotanika laboratoriyasi</h2>
-        <p>Laboratoriya O'zbekiston o'simlik jamoalarini o'rganish, fitogeografik xaritalash va o'simlik qoplamining dinamikasini kuzatish bilan shug'ullanadi.</p>
-        <div class="info-box"><p><strong>Laboratoriya mudiri:</strong> PhD, Beshko N.Yu.</p><p><strong>Xodimlar soni:</strong> 6 ta ilmiy xodim</p></div>
-        <h3>Tadqiqot yo'nalishlari</h3>
-        <ul><li>O'simlik jamoalarini Braun-Blanquet tizimi bo'yicha tasniflash</li><li>Geobotanik xaritalash</li><li>Fitogeografik rayonlanish</li><li>Yaylov degradatsiyasi va tiklanish jarayonlarini kuzatish</li></ul>
+        <p>O'simlik jamoalarini o'rganish, fitogeografik xaritalash va dinamikani kuzatish.</p>
+        <div class="info-box"><p><strong>Mudir:</strong> PhD, Beshko N.Yu. | <strong>Xodimlar:</strong> 6</p></div>
+        <h3>Yo'nalishlari</h3>
+        <ul><li>Braun-Blanquet tizimi bo'yicha tasniflash</li><li>Geobotanik xaritalash</li><li>Fitogeografik rayonlanish</li><li>GIS va masofaviy zondlash</li></ul>
         <div class="stats-mini"><div class="stat-mini"><strong>14</strong><span>Floristik hudud</span></div><div class="stat-mini"><strong>200+</strong><span>Transektlar</span></div><div class="stat-mini"><strong>GIS</strong><span>Xaritalash</span></div></div>
       </div>
     </div></section>

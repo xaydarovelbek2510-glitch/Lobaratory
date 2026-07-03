@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -7,13 +7,16 @@ import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.
   standalone: true,
   imports: [SidebarComponent, RouterLink],
   template: `
-    <div class="page-header"><div class="container"><h1>lab phytochemistry laboratoriyasi</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <a routerLink="/laboratories">Laboratoriyalar</a> › <span>lab phytochemistry</span></div></div></div>
+    <div class="page-header"><div class="container"><h1>Fitokimyo laboratoriyasi</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <a routerLink="/laboratories">Laboratoriyalar</a> › <span>Fitokimyo</span></div></div></div>
     <section class="page-content"><div class="container page-grid">
       <app-sidebar [title]="'LABORATORIYALAR'" [links]="labLinks"></app-sidebar>
       <div class="main-content">
-        <h2>lab phytochemistry laboratoriyasi haqida batafsil</h2>
-        <p>Bu sahifa lab phytochemistry laboratoriyasi haqida to'liq ma'lumot beradi. Laboratoriya zamonaviy jihozlar bilan jihozlangan va xalqaro standartlarga mos keladi.</p>
-        <div class="info-box"><p><strong>Ma'lumot:</strong> Tez orada to'liq kontent qo'shiladi</p></div>
+        <h2>Fitokimyo laboratoriyasi</h2>
+        <p>Dorivor o'simliklardan biologik faol moddalar ajratish va farmakologik xususiyatlarini baholash.</p>
+        <div class="info-box"><p><strong>Mudir:</strong> DSc Mamadalieva N.Z. | <strong>Xodimlar:</strong> 10</p></div>
+        <h3>Jihozlar</h3>
+        <ul><li>Agilent 1260 HPLC</li><li>Shimadzu UV-1900i spektrofotometr</li><li>GC-MS (Agilent)</li></ul>
+        <div class="stats-mini"><div class="stat-mini"><strong>600+</strong><span>Dorivor turlar</span></div><div class="stat-mini"><strong>150+</strong><span>Ajratilgan moddalar</span></div><div class="stat-mini"><strong>5</strong><span>Patentlar</span></div></div>
       </div>
     </div></section>
   `
