@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router'; from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -7,13 +7,16 @@ import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.
   standalone: true,
   imports: [SidebarComponent, RouterLink],
   template: `
-    <div class="page-header"><div class="container"><h1>lab resources laboratoriyasi</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <a routerLink="/laboratories">Laboratoriyalar</a> › <span>lab resources</span></div></div></div>
+    <div class="page-header"><div class="container"><h1>Tabiiy resurslar laboratoriyasi</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <a routerLink="/laboratories">Laboratoriyalar</a> › <span>Tabiiy resurslar</span></div></div></div>
     <section class="page-content"><div class="container page-grid">
       <app-sidebar [title]="'LABORATORIYALAR'" [links]="labLinks"></app-sidebar>
       <div class="main-content">
-        <h2>lab resources laboratoriyasi haqida batafsil</h2>
-        <p>Bu sahifa lab resources laboratoriyasi haqida to'liq ma'lumot beradi. Laboratoriya zamonaviy jihozlar bilan jihozlangan va xalqaro standartlarga mos keladi.</p>
-        <div class="info-box"><p><strong>Ma'lumot:</strong> Tez orada to'liq kontent qo'shiladi</p></div>
+        <h2>Tabiiy o'simlik resurslari laboratoriyasi</h2>
+        <p>O'simlik resurslarini inventarizatsiya qilish, baholash va barqaror foydalanish.</p>
+        <div class="info-box"><p><strong>Mudir:</strong> PhD Raxmatov A.B. | <strong>Xodimlar:</strong> 5</p></div>
+        <h3>Yo'nalishlari</h3>
+        <ul><li>Resurs zahiralarini baholash</li><li>Populyatsiya dinamikasi</li><li>Etnobotanik tadqiqotlar</li><li>Introduksiya imkoniyatlari</li></ul>
+        <div class="stats-mini"><div class="stat-mini"><strong>250+</strong><span>Foydali turlar</span></div><div class="stat-mini"><strong>30+</strong><span>Ekspeditsiyalar</span></div><div class="stat-mini"><strong>Etnobotanika</strong><span>Maxsus yo'nalish</span></div></div>
       </div>
     </div></section>
   `
