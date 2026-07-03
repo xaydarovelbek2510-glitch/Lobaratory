@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
 import { ApiService, NewsItem } from '../../services/api.service';
 
-@Component({ selector: 'app-news', standalone: true, imports: [CommonModule, SidebarComponent],
+@Component({ selector: 'app-news', standalone: true, imports: [CommonModule, SidebarComponent, RouterLink],
   template: `
     <div class="page-header"><div class="container"><h1>Yangiliklar</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <span>Yangiliklar</span></div></div></div>
     <section class="page-content"><div class="container page-grid">
