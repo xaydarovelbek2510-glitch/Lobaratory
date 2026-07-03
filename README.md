@@ -92,6 +92,59 @@ Sayt `http://localhost:4200` da ochiladi.
 | Kontaktlar | `/contacts` | Manzil, telefon |
 | Yangiliklar | `/news` | So'nggi yangiliklar |
 
+## 🐳 Docker orqali ishga tushirish
+
+Eng oson usul — **Docker Compose** bilan bitta komandada:
+
+```bash
+# Loyihani clone qiling
+git clone https://github.com/xaydarovelbek2510-glitch/Lobaratory.git
+cd Lobaratory
+
+# Docker orqali ishga tushirish (bitta komanda!)
+docker-compose up --build
+```
+
+Tayyor! Brauzerda oching:
+- 🌐 **Sayt:** http://localhost
+- 🔌 **API:** http://localhost:8080/api/health
+
+### Docker buyruqlari:
+
+```bash
+# Background'da ishga tushirish
+docker-compose up --build -d
+
+# Loglarni ko'rish
+docker-compose logs -f
+
+# To'xtatish
+docker-compose down
+
+# Qayta build qilish (kod o'zgarganida)
+docker-compose up --build
+
+# Barcha konteynerlar va image'larni tozalash
+docker-compose down --rmi all
+```
+
+### Docker tuzilmasi:
+
+| Konteyner | Texnologiya | Port | Vazifa |
+|-----------|-------------|------|--------|
+| `botany-frontend` | Nginx + Angular build | **:80** | Saytni ko'rsatish + API proxy |
+| `botany-backend` | JRE 17 + Spring Boot | **:8080** | REST API |
+
+### Qanday ishlaydi:
+
+```
+Brauzer → :80 (Nginx)
+              ├── /            → Angular SPA (static fayllar)
+              └── /api/*       → proxy → :8080 (Spring Boot)
+```
+
+---
+
 ## 🎨 Dizayn xususiyatlari
 
 - ✅ botany.uz saytidan ilhomlangan professional dizayn

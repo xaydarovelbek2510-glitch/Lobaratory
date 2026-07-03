@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api'
+  apiUrl: ''  // Production'da Nginx proxy orqali /api/* yo'naltiriladi
 };
