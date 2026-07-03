@@ -1,0 +1,43 @@
+.navbar { background: #2e7d32; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+.nav-menu { display: flex; align-items: stretch; list-style: none; }
+.nav-menu > li > a {
+  display: block; padding: 16px 20px; color: #fff;
+  font-size: 13px; font-weight: 700; letter-spacing: .4px;
+  text-transform: uppercase; text-decoration: none; transition: background .3s;
+}
+.nav-menu > li > a:hover, .nav-menu > li > a.active { background: #1b5e20; }
+.nav-toggle { display: none; background: none; color: #fff; font-size: 24px; padding: 10px; }
+
+/* DROPDOWN */
+.has-dropdown { position: relative; }
+.dropdown {
+  position: absolute; top: 100%; left: 0; min-width: 280px;
+  background: #fff; border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15); opacity: 0; visibility: hidden;
+  transform: translateY(10px); transition: all .3s; z-index: 100; list-style: none;
+}
+.has-dropdown:hover > .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown li a {
+  display: block; padding: 12px 20px; font-size: 14px;
+  color: #333; border-bottom: 1px solid #f0f0f0; text-decoration: none; transition: all .3s;
+}
+.dropdown li a:hover { background: #f5f9f5; color: #2e7d32; padding-left: 25px; }
+.dropdown li:last-child a { border-bottom: none; }
+
+/* SUBDROPDOWN */
+.has-subdropdown { position: relative; }
+.subdropdown {
+  position: absolute; top: 0; left: 100%; min-width: 280px;
+  background: #fff; border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15); opacity: 0; visibility: hidden;
+  transform: translateX(10px); transition: all .3s; z-index: 101; list-style: none;
+}
+.has-subdropdown:hover > .subdropdown { opacity: 1; visibility: visible; transform: translateX(0); }
+
+@media (max-width: 768px) {
+  .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #1b5e20; z-index: 999; }
+  .nav-menu.open { display: flex; }
+  .nav-toggle { display: block; }
+  .dropdown, .subdropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; }
+}
