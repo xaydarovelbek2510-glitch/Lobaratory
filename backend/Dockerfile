@@ -10,6 +10,10 @@ RUN mvn package -DskipTests -B
 # ===== STAGE 2: Run =====
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
+
+# wget healthcheck uchun kerak (Alpine'da default mavjud)
+RUN apk add --no-cache wget
+
 COPY --from=build /app/target/*.jar app.jar
 
 # Non-root user
