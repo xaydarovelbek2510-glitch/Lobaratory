@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router'; from '@angular/core';
 import { SidebarComponent, SidebarLink } from '../../components/sidebar/sidebar.component';
-@Component({ selector: 'app-contacts', standalone: true, imports: [SidebarComponent],
+@Component({ selector: 'app-contacts', standalone: true, imports: [SidebarComponent, RouterLink],
   template: `
     <div class="page-header"><div class="container"><h1>Kontaktlar</h1><div class="breadcrumb"><a routerLink="/">Bosh sahifa</a> › <span>Kontaktlar</span></div></div></div>
     <section class="page-content"><div class="container page-grid">

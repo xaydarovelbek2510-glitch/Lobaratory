@@ -44,7 +44,7 @@ import { CommonModule } from '@angular/common';
       </div>
     </nav>
   `,
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
   mobileMenuOpen = false;

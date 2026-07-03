@@ -45,6 +45,6 @@ import { RouterLink } from '@angular/router';
       </div>
     </footer>
   `,
-  styleUrl: './footer.component.css'
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {}

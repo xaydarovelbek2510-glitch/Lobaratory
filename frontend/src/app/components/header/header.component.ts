@@ -50,6 +50,6 @@ import { RouterLink } from '@angular/router';
       </div>
     </header>
   `,
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {}

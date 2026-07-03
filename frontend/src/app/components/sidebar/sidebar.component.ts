@@ -21,7 +21,7 @@ export interface SidebarLink {
       </ul>
     </aside>
   `,
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
   @Input() title = '';
