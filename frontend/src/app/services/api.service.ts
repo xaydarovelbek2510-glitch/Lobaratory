@@ -10,7 +10,7 @@ export interface Laboratory { id: string; name: string; head: string; staffCount
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.apiUrl || '';
 
   constructor(private http: HttpClient) {}
 
